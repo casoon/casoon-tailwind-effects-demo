@@ -1,0 +1,288 @@
+/* Playground Styles */
+
+/* Enhanced Playground Styles with Better Contrast */
+.playground { 
+  position: sticky; 
+  top: 1rem; 
+  background: rgba(255,255,255,.95); 
+  border: 1px solid rgba(0,0,0,.15); 
+  border-radius: 0.75rem; 
+  padding: 1.5rem; 
+  color: #1e293b;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+.playground label { 
+  display: block; 
+  font-size: .875rem; 
+  font-weight: 600;
+  color: #334155;
+  margin: .75rem 0 .375rem;
+}
+
+.playground input[type="range"] { 
+  width: 100%; 
+}
+
+.playground .row { 
+  display: flex; 
+  gap: .75rem; 
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.playground .row input[type="color"] { 
+  width: 2.5rem; 
+  height: 2.5rem; 
+  border: 2px solid rgba(0,0,0,0.1);
+  border-radius: 0.5rem;
+  padding: 0; 
+  background: none; 
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.playground .row input[type="color"]:hover {
+  border-color: rgba(0,0,0,0.3);
+  transform: scale(1.05);
+}
+
+/* Enhanced Tip Section with Better Contrast */
+.playground .tip-section {
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-top: 1.5rem;
+}
+
+.playground .tip-section h4 {
+  color: #1e40af;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+}
+
+.playground .tip-section p {
+  color: #1e293b;
+  margin: 0;
+  line-height: 1.5;
+  font-size: 0.875rem;
+}
+
+/* Enhanced Live Preview with Better Contrast */
+.playground .live-preview {
+  background: linear-gradient(135deg, #ff6b35 0%, #00d4ff 100%);
+  border-radius: 1rem;
+  padding: 2rem;
+  margin: 1.5rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.playground .live-preview::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+}
+
+.playground .live-preview h3 {
+  color: white;
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin: 0 0 1rem 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 1;
+}
+
+.playground .live-preview p {
+  color: white;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.6;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 1;
+}
+
+.playground .live-preview .buttons {
+  display: flex;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.playground .live-preview .btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.playground .live-preview .btn-neutral {
+  background: rgba(71, 85, 105, 0.9);
+  color: white;
+}
+
+.playground .live-preview .btn-primary {
+  background: linear-gradient(135deg, #ff6b35, #00d4ff);
+  color: white;
+}
+
+.playground .live-preview .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Enhanced Navigation Preview with Better Contrast */
+.playground .nav-preview {
+  background: rgba(248, 250, 252, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.playground .nav-preview h4 {
+  color: #1e293b;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+  font-size: 1.125rem;
+}
+
+.playground .nav-preview .nav-element {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  padding: 1rem 1.5rem;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.playground .nav-preview .nav-element span {
+  color: #334155;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.playground .nav-preview p {
+  color: #475569;
+  margin: 0;
+  line-height: 1.5;
+  font-size: 0.875rem;
+}
+
+/* Enhanced CSS Variables Section */
+.playground .css-variables {
+  background: rgba(248, 250, 252, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.playground .css-variables h4 {
+  color: #1e293b;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+  font-size: 1.125rem;
+}
+
+.playground .css-variables .variable-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.playground .css-variables .variable-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.playground .css-variables .variable-name {
+  color: #1e293b;
+  font-weight: 500;
+  font-family: 'Courier New', monospace;
+  font-size: 0.875rem;
+}
+
+.playground .css-variables .variable-range {
+  color: #64748b;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* Enhanced Range Slider Styling */
+.playground input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  background: rgba(59, 130, 246, 0.2);
+  border-radius: 3px;
+  outline: none;
+}
+
+.playground input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #3b82f6;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+}
+
+.playground input[type="range"]::-webkit-slider-thumb:hover {
+  background: #2563eb;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.playground input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: #3b82f6;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+}
+
+.playground input[type="range"]::-moz-range-thumb:hover {
+  background: #2563eb;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Value Display Enhancement */
+.playground .value-display {
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  margin-top: 0.5rem;
+  font-family: 'Courier New', monospace;
+  font-size: 0.875rem;
+  color: #1e40af;
+  font-weight: 600;
+  text-align: center;
+}

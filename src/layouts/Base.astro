@@ -1,0 +1,30 @@
+---
+const { title = "Casoon Effects Demo", navTheme = "light" } = Astro.props;
+---
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <link rel="stylesheet" href="/src/styles/app.css" />
+  </head>
+  <body class="bg-surface-subtle" style="min-height:100svh;">
+    <header class="glass-header-overlay">
+      <div class="container-demo">
+        <nav class={`glass ${navTheme === "light" ? "glass-light" : ""}`}>
+          <ul style="display:flex; gap:1rem; align-items:center; margin:0;">
+            <li><a href="/" class={Astro.url.pathname === "/" ? "active" : ""}>Home</a></li>
+            <li><a href="/components" class={Astro.url.pathname === "/components" ? "active" : ""}>Komponenten</a></li>
+            <li><a href="/playground" class={Astro.url.pathname === "/playground" ? "active" : ""}>Playground</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="container-demo section" style="opacity:.8;">
+      <p>© {new Date().getFullYear()} Casoon Effects</p>
+    </footer>
+  </body>
+</html>

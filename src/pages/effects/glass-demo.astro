@@ -1,0 +1,207 @@
+---
+import Base from '../../layouts/Base.astro';
+import ComponentShowcase from '../../components/ComponentShowcase.astro';
+---
+
+<Base title="Glas Effects Demo" navTheme="dark">
+  <section class="max-w-7xl mx-auto px-6 py-12 space-y-12">
+    <h1 class="text-3xl font-bold mb-2">Glass Effects – Einheitliche Demos</h1>
+    <p class="text-slate-400">Schalter für Hell/Dunkel &amp; Quellcode sind in jedem Block identisch.</p>
+
+    <!-- Cards -->
+    <ComponentShowcase title="Card – .glass / .glass-light" description="Basis-Karten in hell & dunkel" minHeight="10rem">
+      <!-- LIGHT -->
+      <div slot="light">
+        <div class="glass-light px-6 py-4 rounded-xl inline-block">.glass-light</div>
+      </div>
+      <!-- DARK -->
+      <div slot="dark">
+        <div class="glass px-6 py-4 rounded-xl inline-block">.glass</div>
+      </div>
+      <!-- CODE -->
+      <template slot="code">
+{`<div class="glass">Inhalt</div>
+<div class="glass-light">Inhalt</div>`}
+      </template>
+    </ComponentShowcase>
+
+    <ComponentShowcase title="Card – .glass-card / .glass-card-light" description="Vordefinierte Card-Komponenten" minHeight="12rem">
+      <div slot="light">
+        <article class="glass-card-light">
+          <h3 class="text-lg font-semibold mb-1">Glass Card Light</h3>
+          <p class="opacity-80">Helle Karte mit softer Border.</p>
+        </article>
+      </div>
+      <div slot="dark">
+        <article class="glass-card">
+          <h3 class="text-lg font-semibold mb-1">Glass Card</h3>
+          <p class="opacity-90">Dunkle Karte mit Blur &amp; Shadow.</p>
+        </article>
+      </div>
+      <template slot="code">
+{`<article class="glass-card">...</article>
+<article class="glass-card-light">...</article>`}
+      </template>
+    </ComponentShowcase>
+
+    <ComponentShowcase title="Card – .glass-card-light-enhanced" description="Erweiterte helle Karte mit Gradient-Sheen" minHeight="12rem" initialTheme="light">
+      <div slot="light">
+        <article class="glass-card-light-enhanced">
+          <h3 class="text-lg font-semibold mb-1">Enhanced Light</h3>
+          <p>Gradient-Linie &amp; stärkerer Blur.</p>
+        </article>
+      </div>
+      <div slot="dark">
+        <article class="glass-card">Gegenüberstellung im Dunkeln</article>
+      </div>
+      <template slot="code">
+{`<article class="glass-card-light-enhanced">...</article>`}
+      </template>
+    </ComponentShowcase>
+
+    <ComponentShowcase title="Themed Cards" description=".glass-card-theme mit Varianten" minHeight="14rem">
+      <div slot="light">
+        <div class="grid md:grid-cols-2 gap-4">
+          <article class="glass-card-theme glass-card-light">
+            <h3>Light</h3><p>Helle Theme-Karte.</p>
+          </article>
+          <article class="glass-card-theme glass-slide-card">
+            <h3>Slide Variant</h3><p>Gradient Heading.</p>
+          </article>
+        </div>
+      </div>
+      <div slot="dark">
+        <article class="glass-card-theme glass-card-standard">
+          <h3>Standard (Dark)</h3><p>Klassische dunkle Theme-Karte.</p>
+        </article>
+      </div>
+      <template slot="code">
+{`<article class="glass-card-theme glass-card-standard">...</article>
+<article class="glass-card-theme glass-card-light">...</article>
+<article class="glass-card-theme glass-slide-card">...</article>`}
+      </template>
+    </ComponentShowcase>
+
+    <!-- Buttons -->
+    <ComponentShowcase title="Buttons" description="Kontraststarke Glass-Buttons" minHeight="8rem">
+      <div slot="light">
+        <div class="flex gap-3 flex-wrap">
+          <button class="glass-button">Default</button>
+          <button class="glass-button-primary">Primary</button>
+          <button class="glass-button-secondary">Secondary</button>
+        </div>
+      </div>
+      <div slot="dark">
+        <div class="flex gap-3 flex-wrap">
+          <button class="glass-button">Default</button>
+          <button class="glass-button-primary">Primary</button>
+          <button class="glass-button-secondary">Secondary</button>
+        </div>
+      </div>
+      <template slot="code">
+{`<button class="glass-button">Default</button>
+<button class="glass-button-primary">Primary</button>
+<button class="glass-button-secondary">Secondary</button>`}
+      </template>
+    </ComponentShowcase>
+
+    <!-- Inputs -->
+    <ComponentShowcase title="Inputs" description="Sichtbare Inputs für beide Themes" minHeight="12rem">
+      <div slot="light">
+        <div class="grid gap-3">
+          <input class="glass-input-light" placeholder="glass-input-light" />
+          <div class="input-container">
+            <input class="glass-input-enhanced" placeholder="Mit Icon" />
+            <span class="input-icon">🔍</span>
+          </div>
+        </div>
+      </div>
+      <div slot="dark">
+        <div class="grid gap-3">
+          <input class="glass-input" placeholder="glass-input (dark)" />
+          <div class="input-container">
+            <input class="glass-input-enhanced" placeholder="Mit Icon" />
+            <span class="input-icon">🔍</span>
+          </div>
+        </div>
+      </div>
+      <template slot="code">
+{`<input class="glass-input" placeholder="..." />
+<input class="glass-input-light" placeholder="..." />
+<div class="input-container">
+  <input class="glass-input-enhanced" placeholder="..." />
+  <span class="input-icon">🔍</span>
+</div>`}
+      </template>
+    </ComponentShowcase>
+
+    <!-- Navigation -->
+    <ComponentShowcase title="Navigation" description="Light/Dark Nav + Enhanced" minHeight="8rem">
+      <div slot="light">
+        <nav class="glass-nav-light p-3 flex gap-3">
+          <a href="#" class="active">Home</a><a href="#">Docs</a><a href="#">Blog</a>
+        </nav>
+      </div>
+      <div slot="dark">
+        <div class="grid gap-3">
+          <nav class="glass-nav p-3 flex gap-3">
+            <a href="#" class="active">Home</a><a href="#">Docs</a><a href="#">Blog</a>
+          </nav>
+          <nav class="glass-nav-dark p-3 flex gap-3">
+            <a href="#" class="active">Home</a><a href="#">Docs</a><a href="#">Blog</a>
+          </nav>
+          <nav class="glass-nav-enhanced p-3 flex gap-3">
+            <a class="nav-link" href="#">Home</a>
+            <a class="nav-link" href="#">Docs</a>
+            <a class="nav-link-primary" href="#">Get started</a>
+          </nav>
+        </div>
+      </div>
+      <template slot="code">
+{`<nav class="glass-nav">...</nav>
+<nav class="glass-nav-light">...</nav>
+<nav class="glass-nav-dark">...</nav>
+<nav class="glass-nav-enhanced">...</nav>`}
+      </template>
+    </ComponentShowcase>
+
+    <!-- Slide / Specials – volle Höhe -->
+    <ComponentShowcase
+      title="Slide Card (full-bleed)"
+      description="Seitenbreite/-höhe Demo – ideal für Interaktionen"
+      fullBleed={true}
+      minHeight="40vh"
+      codeLanguage="html"
+      >
+      <div slot="light">
+        <section class="glass-slide-card flex flex-col justify-between min-h-[40vh] p-8">
+          <h3 class="text-2xl font-bold">Slide Card</h3>
+          <div class="slide-content">
+            <div class="slide-indicator">
+              <span class="slide-dot active"></span><span class="slide-dot"></span><span class="slide-dot"></span>
+            </div>
+            <div class="slide-progress"><div class="slide-progress-bar"></div></div>
+            <div class="flex gap-2">
+              <button class="slide-btn prev">Prev</button>
+              <button class="slide-btn next">Next</button>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div slot="dark">
+        <section class="glass-slide-card flex flex-col justify-between min-h-[40vh] p-8">
+          <h3 class="text-2xl font-bold">Slide Card</h3>
+          <p class="opacity-90">Dunkle Umgebung – Hover hebt an.</p>
+          <button class="glass-button-primary self-start">Call to Action</button>
+        </section>
+      </div>
+      <template slot="code">
+{`<section class="glass-slide-card min-h-[40vh] p-8">
+  <h3>Slide Card</h3>
+  <!-- your interactive content -->
+</section>`}
+      </template>
+    </ComponentShowcase>
+
+  </section>
+</Base>

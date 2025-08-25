@@ -1,0 +1,258 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+
+<Base title="Glas Effects Demo" navTheme="dark">
+  <section class="max-w-7xl mx-auto px-6 py-12 space-y-16">
+    <header class="space-y-2">
+      <h1 class="text-3xl font-bold">Glass Effects – Demo</h1>
+      <p class="text-slate-400">Alle Glass-Komponenten in Hell &amp; Dunkel mit Quellcode.</p>
+    </header>
+
+    <!-- =========================
+         Helper: Swatches Wrapper
+         ========================= -->
+    <style is:global>
+      .demo-grid{display:grid;gap:1.25rem}
+      @media (min-width: 768px){.demo-grid{grid-template-columns:1fr 1fr}}
+      .demo-swatch{border-radius:1rem;padding:1.25rem}
+      .demo-dark{background:linear-gradient(180deg,var(--bg-base-from),var(--bg-base-to));color:white}
+      .demo-light{background:linear-gradient(180deg,#f1f5f9,#ffffff);color:#0f172a;border:1px solid rgba(0,0,0,.06)}
+      .demo-title{font-weight:600;margin-bottom:.75rem}
+      .code{background:#0b1220;color:#e5e7eb;padding:1rem;border-radius:.75rem;overflow:auto;font-size:.85rem}
+      .stack{display:grid;gap:1rem}
+      .row{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center}
+    </style>
+
+    <!-- ============ Core ============ -->
+    <section class="space-y-6">
+      <h2 class="text-2xl font-semibold">Core &amp; Basics</h2>
+      <div class="demo-grid">
+        <!-- Dark -->
+        <div class="demo-swatch demo-dark stack">
+          <div class="demo-title">Dunkel</div>
+          <div class="row">
+            <div class="glass px-6 py-4">.glass</div>
+            <div class="glass-card px-6 py-4">.glass-card</div>
+            <div class="glass-slide-card" style="min-width:16rem;min-height:8rem">
+              <h3 class="text-lg font-semibold">.glass-slide-card</h3>
+              <p class="text-sm opacity-90">Hover hebt die Karte an.</p>
+              <button class="glass-button-primary">Action</button>
+            </div>
+          </div>
+          <pre class="code">{`<div class="glass">...</div>
+<div class="glass-card">...</div>
+<div class="glass-slide-card">...</div>`}</pre>
+        </div>
+
+        <!-- Light -->
+        <div class="demo-swatch demo-light stack">
+          <div class="demo-title">Hell</div>
+          <div class="row">
+            <div class="glass-light px-6 py-4">.glass-light</div>
+            <div class="glass-card-light px-6 py-4">.glass-card-light</div>
+            <div class="glass-card-light-enhanced" style="min-width:16rem">
+              <h3 class="text-lg font-semibold">.glass-card-light-enhanced</h3>
+              <p class="text-sm">Mit Gradient-Sheen oben.</p>
+            </div>
+          </div>
+          <pre class="code">{`<div class="glass-light">...</div>
+<div class="glass-card-light">...</div>
+<div class="glass-card-light-enhanced">...</div>`}</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Themed Cards ============ -->
+    <section class="space-y-6">
+      <h2 class="text-2xl font-semibold">Themed Cards</h2>
+      <div class="demo-grid">
+        <!-- Dark -->
+        <div class="demo-swatch demo-dark stack">
+          <div class="row">
+            <article class="glass-card-theme glass-card-standard" style="min-width:16rem">
+              <h3>Standard (Dark)</h3>
+              <p>Klassische dunkle Theme-Karte.</p>
+              <code>code sample</code>
+            </article>
+            <article class="glass-card-theme glass-slide-card" style="min-width:16rem">
+              <h3>Slide Variant</h3>
+              <p>Gradient-Heading + softer Border.</p>
+            </article>
+          </div>
+          <pre class="code">{`<div class="glass-card-theme glass-card-standard">...</div>
+<div class="glass-card-theme glass-slide-card">...</div>`}</pre>
+        </div>
+
+        <!-- Light -->
+        <div class="demo-swatch demo-light stack">
+          <div class="row">
+            <article class="glass-card-theme glass-card-light" style="min-width:16rem">
+              <h3>Light</h3>
+              <p>Helle Theme-Karte.</p>
+              <code>code sample</code>
+            </article>
+          </div>
+          <pre class="code">{`<div class="glass-card-theme glass-card-light">...</div>`}</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Buttons ============ -->
+    <section class="space-y-6">
+      <h2 class="text-2xl font-semibold">Buttons</h2>
+      <div class="demo-grid">
+        <!-- Dark -->
+        <div class="demo-swatch demo-dark stack">
+          <div class="row">
+            <button class="glass-button">.glass-button</button>
+            <button class="glass-button-primary">.glass-button-primary</button>
+            <button class="glass-button-secondary">.glass-button-secondary</button>
+            <button class="glass-button" disabled>disabled</button>
+          </div>
+          <pre class="code">{`<button class="glass-button">Default</button>
+<button class="glass-button-primary">Primary</button>
+<button class="glass-button-secondary">Secondary</button>
+<button class="glass-button" disabled>disabled</button>`}</pre>
+        </div>
+
+        <!-- Light -->
+        <div class="demo-swatch demo-light stack">
+          <div class="row">
+            <button class="glass-button">.glass-button</button>
+            <button class="glass-button-primary">.glass-button-primary</button>
+            <button class="glass-button-secondary">.glass-button-secondary</button>
+          </div>
+          <pre class="code">{`<button class="glass-button">Default</button>
+<button class="glass-button-primary">Primary</button>
+<button class="glass-button-secondary">Secondary</button>`}</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Inputs ============ -->
+    <section class="space-y-6">
+      <h2 class="text-2xl font-semibold">Inputs</h2>
+      <div class="demo-grid">
+        <!-- Dark -->
+        <div class="demo-swatch demo-dark stack">
+          <div class="row" style="min-width:18rem">
+            <input class="glass-input" placeholder="glass-input (dark)" />
+            <div class="input-container" style="min-width:18rem">
+              <input class="glass-input-enhanced" placeholder="glass-input-enhanced" />
+              <span class="input-icon">🔍</span>
+            </div>
+          </div>
+          <pre class="code">{`<input class="glass-input" placeholder="..." />
+<div class="input-container">
+  <input class="glass-input-enhanced" placeholder="..." />
+  <span class="input-icon">🔍</span>
+</div>`}</pre>
+        </div>
+
+        <!-- Light -->
+        <div class="demo-swatch demo-light stack">
+          <div class="row" style="min-width:18rem">
+            <input class="glass-input-light" placeholder="glass-input-light" />
+            <input class="glass-input" placeholder="glass-input in light bg" />
+          </div>
+          <pre class="code">{`<input class="glass-input-light" placeholder="..." />
+<input class="glass-input" placeholder="..." />`}</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Navigation ============ -->
+    <section class="space-y-6">
+      <h2 class="text-2xl font-semibold">Navigation</h2>
+      <div class="demo-grid">
+        <!-- Dark -->
+        <div class="demo-swatch demo-dark stack">
+          <nav class="glass-nav p-3 row">
+            <a href="#" class="active">Home</a>
+            <a href="#">Docs</a>
+            <a href="#">Blog</a>
+          </nav>
+          <nav class="glass-nav-dark p-3 row">
+            <a href="#" class="active">Home</a>
+            <a href="#">Docs</a>
+            <a href="#">Blog</a>
+          </nav>
+          <nav class="glass-nav-enhanced p-3 row">
+            <a class="nav-link" href="#">Home</a>
+            <a class="nav-link" href="#">Docs</a>
+            <a class="nav-link-primary" href="#">Get started</a>
+          </nav>
+          <pre class="code">{`<nav class="glass-nav">...</nav>
+<nav class="glass-nav-dark">...</nav>
+<nav class="glass-nav-enhanced">...</nav>`}</pre>
+        </div>
+
+        <!-- Light -->
+        <div class="demo-swatch demo-light stack">
+          <nav class="glass-nav-light p-3 row">
+            <a href="#" class="active">Home</a>
+            <a href="#">Docs</a>
+            <a href="#">Blog</a>
+          </nav>
+          <pre class="code">{`<nav class="glass-nav-light">...</nav>`}</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Utilities ============ -->
+    <section class="space-y-6">
+      <h2 class="text-2xl font-semibold">Utilities &amp; Specials</h2>
+      <div class="demo-grid">
+        <!-- Dark -->
+        <div class="demo-swatch demo-dark stack">
+          <div class="row">
+            <div class="text-gradient text-2xl font-bold">.text-gradient</div>
+            <div class="text-accent-gradient text-2xl font-bold">.text-accent-gradient</div>
+          </div>
+          <div class="row items-center w-full">
+            <div class="progress-rail"><div class="progress-fill" style="--progress-width: 60%"></div></div>
+          </div>
+          <div class="row">
+            <div class="glass-card glass-pulse px-4 py-2">.glass-pulse</div>
+            <div class="glass-card glass-glow px-4 py-2">.glass-glow</div>
+            <div class="glass-card glass-sheen px-4 py-2">.glass-sheen</div>
+          </div>
+          <pre class="code">{`<div class="text-gradient">...</div>
+<div class="progress-rail"><div class="progress-fill" style="--progress-width:60%"></div></div>
+<div class="glass-card glass-pulse">...</div>`}</pre>
+        </div>
+
+        <!-- Light -->
+        <div class="demo-swatch demo-light stack">
+          <div class="row">
+            <div class="slide-content" style="min-width:16rem">
+              <div class="slide-indicator">
+                <span class="slide-dot active"></span>
+                <span class="slide-dot"></span>
+                <span class="slide-dot"></span>
+              </div>
+              <div class="slide-progress">
+                <div class="slide-progress-bar"></div>
+              </div>
+              <div class="row">
+                <button class="slide-btn prev">Prev</button>
+                <button class="slide-btn next">Next</button>
+              </div>
+            </div>
+          </div>
+          <pre class="code">{`<div class="slide-content">
+  <div class="slide-indicator">
+    <span class="slide-dot active"></span>
+    <span class="slide-dot"></span>
+    <span class="slide-dot"></span>
+  </div>
+  <div class="slide-progress"><div class="slide-progress-bar"></div></div>
+  <button class="slide-btn prev">Prev</button>
+  <button class="slide-btn next">Next</button>
+</div>`}</pre>
+        </div>
+      </div>
+    </section>
+  </section>
+</Base>
