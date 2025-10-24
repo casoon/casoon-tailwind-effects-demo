@@ -1,0 +1,72 @@
+---
+import DocsBase from '../../layouts/DocsBase.astro';
+import PlaygroundLink from '../../components/docs/PlaygroundLink.astro';
+---
+
+<DocsBase title="Casoon Effects – Documentation">
+  <h1>Documentation</h1>
+  <p class="lead">Clear, scalable examples for <span class="code-inline">@casoon/tailwindcss-effects</span>. Each block shows a live demo, copyable source code, and concise usage notes.</p>
+
+  <section class="section prose">
+    <h2>Inhalte dieses Guides</h2>
+    <ul>
+      <li><a class="underline" href="/docs/glass">Glass</a> – Effekte, Klassenreferenz, Tokens</li>
+      <li><a class="underline" href="/docs/orbs">Orbs/Backgrounds</a> – Varianten, Performance</li>
+      <li><a class="underline" href="/docs/gradients">Gradients</a> – Überblick & Kombinierbarkeit</li>
+      <li><a class="underline" href="/docs/tokens">Design Tokens</a> – Custom Properties</li>
+      <li><a class="underline" href="/docs/migration">Migration</a> – Versionswechsel</li>
+      <li><a class="underline" href="/docs/changelog">Changelog</a> – Abgleich mit der Bibliothek</li>
+    </ul>
+  </section>
+
+  <div class="cards">
+    <a class="card" href="/docs/getting-started">
+      <h3>Getting Started</h3>
+      <p>Install, configure, and use in minutes.</p>
+    </a>
+    <a class="card" href="/docs/guides">
+      <h3>Guides</h3>
+      <p>Practical recipes: Orbs+Glass Hero, Theming, Performance.</p>
+    </a>
+    <a class="card" href="/docs/conventions">
+      <h3>Conventions</h3>
+      <p>Naming, tokens, and a11y pointers for consistent UIs.</p>
+    </a>
+    <a class="card" href="/docs/glass">
+      <h3>Glass</h3>
+      <p>Cards, buttons, inputs and navigation with glass effects.</p>
+    </a>
+    <a class="card" href="/docs/orbs">
+      <h3>Orbs</h3>
+      <p>Animated, performant background orbs for hero sections and panels.</p>
+    </a>
+    <a class="card" href="/docs/gradients">
+      <h3>Gradients</h3>
+      <p>Highlight text and UI with gradients (e.g. <span class="code-inline">.text-gradient</span>).</p>
+    </a>
+    <a class="card" href="/docs/tokens">
+      <h3>Tokens</h3>
+      <p>All relevant CSS variables, defaults, and ranges.</p>
+    </a>
+    <a class="card" href="/docs/changelog">
+      <h3>Changelog</h3>
+      <p>Changes per version at a glance.</p>
+    </a>
+    <a class="card" href="/docs/migration">
+      <h3>Migration</h3>
+      <p>Upgrade guidance for breaking changes.</p>
+    </a>
+  </div>
+
+  
+
+  <section class="section prose">
+    <h2>Playground – Quick Access</h2>
+    <p>Try common presets directly:</p>
+    <div class="cards">
+      <div class="card"><h3>Hero + CTA</h3><p>Orbs hero with glass card.</p><p style="margin-top:.5rem"><PlaygroundLink preset="hero-cta" pane="dark" /></p></div>
+      <div class="card"><h3>Feature Grid</h3><p>Three cards in a grid.</p><p style="margin-top:.5rem"><PlaygroundLink preset="feature-grid" /></p></div>
+      <div class="card"><h3>Login Card</h3><p>Form with inputs and button.</p><p style="margin-top:.5rem"><PlaygroundLink preset="login-card" /></p></div>
+    </div>
+  </section>
+</DocsBase>

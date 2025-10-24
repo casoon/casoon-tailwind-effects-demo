@@ -1,0 +1,31 @@
+---
+import DocsBase from '../../layouts/DocsBase.astro';
+import DocSection from '../../components/docs/DocSection.astro';
+import CodeBlock from '../../components/docs/CodeBlock.astro';
+---
+
+<DocsBase title="Docs – Migration">
+  <h1>Migration</h1>
+  <p class="lead">Upgrade guidance for breaking changes, with concise examples and suggestions.</p>
+
+  <DocSection id="040" title="Upgrade to 0.4.x" description="Abgleich mit ^0.4.7">
+    <ul>
+      <li>Prüfe geänderte oder neue Klassennamen (insb. Glass- und Orbs-Varianten) und gleiche sie mit der Doku ab.</li>
+      <li>Vergleiche Tokens/Defaults (<code>--glass-blur</code>, <code>--glass-border</code>, <code>--glass-bg</code>, <code>--glass-radius</code>), um visuelle Deltas zu vermeiden.</li>
+      <li>Validiere, dass Build/Import der Bibliothek-CSS zur neuen Version passt (globales Stylesheet oder gebündelte CSS).</li>
+      <li>Empfohlene Card-Klassen: <code>.glass-card</code> und <code>.glass-card-light</code>. Utilities <code>.glass-pulse</code>, <code>.glass-glow</code>, <code>.glass-sheen</code> sind kombinierbar.</li>
+    </ul>
+    <p class="mt-3 text-sm opacity-70">
+      Tipp: Visuelle Regressionen via Beispielseiten vergleichen und Kontrast/Performance auf mobilen Geräten prüfen.
+    </p>
+  </DocSection>
+
+  <DocSection id="033" title="Upgrade to 0.3.x" description="Orbs backgrounds">
+    <ul>
+      <li>New: <code>.bg-orbs-hero</code> (hero background).</li>
+      <li>No breaking changes. Pages with neutral backgrounds continue to work unchanged.</li>
+    </ul>
+  </DocSection>
+
+  <p class="muted">Missing a migration path? Please open an issue or PR with a suggestion.</p>
+</DocsBase>

@@ -1,0 +1,26 @@
+---
+export interface Props {
+  label?: string;
+  effect?: string;
+  variant?: string;
+  pane?: 'light'|'dark';
+  code?: boolean;
+  preset?: string;
+}
+const { label = 'Im Playground öffnen', effect, variant, pane, code = false, preset } = Astro.props;
+const params = new URLSearchParams();
+if (effect) params.set('effect', effect);
+if (variant) params.set('variant', variant);
+if (pane) params.set('pane', pane);
+if (code) params.set('code', '1');
+if (preset) params.set('preset', preset);
+const href = `/playground${params.toString() ? '?' + params.toString() : ''}`;
+---
+<a class="playground-link" href={href}>{label}</a>
+<style is:global>
+  .playground-link{display:inline-flex;gap:.4rem;align-items:center;text-decoration:none;
+    color:#0b1220;background:linear-gradient(180deg,#93c5fd,#60a5fa);
+    padding:.35rem .6rem;border-radius:8px;border:1px solid transparent}
+  .playground-link:hover{filter:brightness(1.03)}
+  .playground-link:active{transform:translateY(1px)}
+</style>

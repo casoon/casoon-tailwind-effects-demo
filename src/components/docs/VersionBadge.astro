@@ -1,0 +1,20 @@
+---
+// Displays the library version from package.json
+// Falls back gracefully if the dependency is missing
+import pkg from '../../../package.json';
+const dep = '@casoon/tailwindcss-effects';
+const version = (pkg.dependencies && pkg.dependencies[dep]) || 'unknown';
+---
+<span class="version-badge" title={`Verifiziert mit ${dep} ${version}`}>
+  <strong>Verifiziert:</strong>
+  <code>{dep}</code>
+  <span class="ver">{version}</span>
+  <style is:global>
+    .version-badge{display:inline-flex;gap:.35rem;align-items:center;border:1px solid var(--docs-border);
+      background:linear-gradient(180deg,var(--docs-panel),var(--docs-panel-2));color:var(--docs-muted);
+      padding:.25rem .5rem;border-radius:8px;font-size:.8rem}
+    .version-badge code{background:rgba(255,255,255,.05);padding:.05rem .3rem;border-radius:6px;color:#cbd5e1}
+    .version-badge .ver{color:#9fb4d1}
+  </style>
+</span>
+

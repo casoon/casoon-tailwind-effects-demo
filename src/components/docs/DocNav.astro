@@ -1,0 +1,21 @@
+---
+export interface Props { active?: 'glass'|'orbs'|'gradients'|'templates'|'home'|'conventions'|'guides'|'changelog'|'migration'|'tokens' }
+const { active = 'home' } = Astro.props;
+---
+<nav class="docs-nav" aria-label="Abschnitte">
+  <a href="/docs/getting-started" class={active==='home'?'active':''}>Start</a>
+  <a href="/docs/glass" class={active==='glass'?'active':''}>Glass</a>
+  <a href="/docs/orbs" class={active==='orbs'?'active':''}>Orbs</a>
+  <a href="/docs/gradients" class={active==='gradients'?'active':''}>Gradients</a>
+  <a href="/docs/conventions" class={active==='conventions'?'active':''}>Conventions</a>
+  <a href="/docs/guides" class={active==='guides'?'active':''}>Guides</a>
+  <a href="/docs/templates" class={active==='templates'?'active':''}>Templates</a>
+  <a href="/docs/changelog" class={active==='changelog'?'active':''}>Changelog</a>
+  <a href="/docs/migration" class={active==='migration'?'active':''}>Migration</a>
+  <style is:global>
+    .docs-nav{display:flex;gap:.5rem;flex-wrap:wrap;margin:0 -.25rem .75rem}
+    .docs-nav a{color:var(--docs-muted);text-decoration:none;padding:.35rem .65rem;border-radius:999px;border:1px solid transparent}
+    .docs-nav a:hover{color:var(--docs-text);border-color:var(--docs-border)}
+    .docs-nav a.active{color:#0b1220;background:linear-gradient(180deg,#93c5fd,#60a5fa)}
+  </style>
+</nav>

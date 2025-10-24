@@ -24,17 +24,28 @@
   },
   "homepage": "https://github.com/casoon/tailwindcss-effects-demo#readme",
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
+    "dev": "node scripts/prebuild-effects.mjs && astro dev",
+    "build": "node scripts/prebuild-effects.mjs && astro build",
     "preview": "astro preview",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "docs:dev": "astro dev --open /docs",
+    "docs:check": "astro build && node scripts/docs-verify.mjs",
+    "docs:verify": "node scripts/docs-verify.mjs",
+    "perf:check": "node scripts/lighthouse.mjs",
+    "test:e2e": "playwright test",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:update": "playwright test --update-snapshots"
   },
   "dependencies": {
-    "@casoon/tailwindcss-effects": "^0.1.4",
+    "@casoon/tailwindcss-effects": "^0.4.7",
     "@tailwindcss/vite": "^4.1.11",
     "astro": "^5.13.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@playwright/test": "^1.47.2",
+    "chrome-launcher": "^1.1.0",
+    "lighthouse": "^12.0.0"
+  },
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=8.0.0"

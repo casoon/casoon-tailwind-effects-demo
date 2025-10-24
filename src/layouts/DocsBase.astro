@@ -1,0 +1,77 @@
+---
+import '../styles/docs-tailwind.css';
+import '../styles/docs.css';
+const { title = "Casoon Effects – Documentation" } = Astro.props;
+import VersionBadge from "../components/docs/VersionBadge.astro";
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <link rel="stylesheet" href="/vendor/casoon-effects/index.css" />
+  </head>
+  <body class="docs-body">
+    <header class="docs-header">
+      <div class="docs-container">
+        <a href="/docs" class="brand">Casoon Effects Docs</a>
+        <nav class="docs-nav">
+          <a href="/docs/getting-started" class={Astro.url.pathname.startsWith('/docs/getting-started') ? 'active' : ''}>Start</a>
+          <a href="/docs/glass" class={Astro.url.pathname.startsWith('/docs/glass') ? 'active' : ''}>Glass</a>
+          <a href="/docs/orbs" class={Astro.url.pathname.startsWith('/docs/orbs') ? 'active' : ''}>Orbs</a>
+          <a href="/docs/gradients" class={Astro.url.pathname.startsWith('/docs/gradients') ? 'active' : ''}>Gradients</a>
+          <a href="/docs/conventions" class={Astro.url.pathname.startsWith('/docs/conventions') ? 'active' : ''}>Conventions & A11y</a>
+          <a href="/docs/tokens" class={Astro.url.pathname.startsWith('/docs/tokens') ? 'active' : ''}>Tokens</a>
+          <a href="/docs/guides" class={Astro.url.pathname.startsWith('/docs/guides') ? 'active' : ''}>Guides</a>
+          <a href="/docs/templates" class={Astro.url.pathname.startsWith('/docs/templates') ? 'active' : ''}>Templates</a>
+          <a href="/docs/changelog" class={Astro.url.pathname.startsWith('/docs/changelog') ? 'active' : ''}>Changelog</a>
+          <a href="/docs/migration" class={Astro.url.pathname.startsWith('/docs/migration') ? 'active' : ''}>Migration</a>
+        </nav>
+        <div class="docs-meta">
+          <div class="theme-toggle" role="group" aria-label="Theme">
+            <button type="button" class="tt-btn" data-theme-all="light">Light</button>
+            <button type="button" class="tt-btn" data-theme-all="dark" aria-pressed="true">Dark</button>
+          </div>
+          <VersionBadge />
+        </div>
+      </div>
+    </header>
+    <main class="docs-main">
+      <div class="docs-container">
+        <slot />
+      </div>
+    </main>
+    <footer class="docs-footer">
+      <div class="docs-container">© {new Date().getFullYear()} Casoon – Documentation</div>
+    </footer>
+    <script is:inline>
+      (function(){
+        const ready = (fn)=> (document.readyState==='loading' ? document.addEventListener('DOMContentLoaded', fn, {once:true}) : fn());
+        ready(() => {
+          document.addEventListener('click', async (e) => {
+            const a = (e.target).closest?.('a.anchor');
+            if(!a) return;
+            e.preventDefault();
+            const href = a.getAttribute('href') || '';
+            const url = location.origin + location.pathname + href;
+            try { await navigator.clipboard.writeText(url); } catch {}
+            const old = a.textContent; a.textContent = '✓'; a.classList.add('copied');
+            history.replaceState(null, '', href);
+            setTimeout(()=>{ a.textContent = old; a.classList.remove('copied'); }, 900);
+          });
+
+          // Global theme toggle across all showcases
+          const setAll = (val) => {
+            document.querySelectorAll('.cs-root').forEach(root => {
+              const btn = root.querySelector(`[data-action="set-theme"][data-value="${val}"]`);
+              (btn)?.dispatchEvent(new MouseEvent('click', { bubbles:true, cancelable:true }));
+            });
+            document.querySelectorAll('.theme-toggle [data-theme-all]').forEach(b => b.setAttribute('aria-pressed', b.getAttribute('data-theme-all')===val?'true':'false'));
+          };
+          document.querySelectorAll('.theme-toggle [data-theme-all]').forEach(b => b.addEventListener('click', () => setAll(b.getAttribute('data-theme-all') || 'dark')));
+          setAll('dark');
+        });
+      })();
+    </script>
+  </body>
+</html>

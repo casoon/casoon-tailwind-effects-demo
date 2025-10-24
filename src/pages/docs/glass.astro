@@ -1,0 +1,233 @@
+---
+import DocsBase from '../../layouts/DocsBase.astro';
+import ToC from '../../components/docs/ToC.astro';
+import DocSection from '../../components/docs/DocSection.astro';
+import Tips from '../../components/docs/Tips.astro';
+import TokenControls from '../../components/docs/TokenControls.astro';
+import ComponentShowcase from '../../components/ComponentShowcase.astro';
+import PlaygroundLink from '../../components/docs/PlaygroundLink.astro';
+---
+
+<DocsBase title="Docs – Glass">
+  <h1>Glass</h1>
+  <p class="lead">Core glass effects, cards, buttons, inputs, navigation and utilities. Each example shows a live demo and copyable source code.</p>
+
+  <div class="theme-controls" role="group" aria-label="Theme">
+    <button type="button" class="tc-btn" data-theme-all="light">Light</button>
+    <button type="button" class="tc-btn" data-theme-all="dark" aria-pressed="true">Dark</button>
+  </div>
+
+  <ToC items={[
+    { id: 'basics', label: 'Basics' },
+    { id: 'cards', label: 'Cards' },
+    { id: 'buttons', label: 'Buttons' },
+    { id: 'inputs', label: 'Inputs' },
+    { id: 'navigation', label: 'Navigation' },
+    { id: 'utilities', label: 'Utilities' },
+  ]} />
+
+  <Tips items={[
+    'On light backgrounds prefer .glass-light.',
+    'Use sufficient inner spacing for cards (e.g. p-6).',
+    'Always test buttons with a visible focus state.',
+  ]} />
+
+  <DocSection title="Glass – Klassenreferenz (^0.4.7)">
+    <ul class="list-disc ml-6">
+      <li><code>glass</code> – Basis-Glassmorphism (dunkle Hintergründe)</li>
+      <li><code>glass-light</code> – Variante für helle Hintergründe</li>
+      <li><code>glass-card</code> / <code>glass-card-light</code> – Karten mit Glass-Effekt</li>
+      <li><code>glass-button</code> / <code>glass-button-primary</code> – Buttons im Glass-Stil</li>
+      <li><code>glass-sheen</code> – Akzent/Highlight für Glass-Flächen</li>
+      <li><code>glass-input</code> / <code>glass-input-light</code> – Eingabefelder mit Glass-Styling</li>
+    </ul>
+    <p class="mt-3 text-sm opacity-70">
+      Kombiniere mit Tailwind-Utilities (Padding, Grid, Typography); die Effekte überschreiben keine Layout-Eigenschaften.
+    </p>
+  </DocSection>
+
+  <DocSection title="Glass – Tokens & Custom Properties">
+    <p>Die Effekte sind über CSS Custom Properties anpassbar:</p>
+    <pre><code class="language-css">:root {
+  --glass-radius: 1.25rem;
+  --glass-blur: 12px;
+  --glass-border: rgba(255,255,255,.15);
+  --glass-bg: rgba(255,255,255,.08);
+}</code></pre>
+    <p class="text-sm opacity-70">
+      Tipp: Setze projektweit andere Default-Werte, oder überschreibe sie kontextuell auf Komponentenebene.
+    </p>
+  </DocSection>
+
+  <DocSection title="Best Practices">
+    <ul class="list-disc ml-6">
+      <li>Kontrast prüfen (insbesondere auf hellen Hintergründen).</li>
+      <li>Bewegungs-/Filterkosten im Blick behalten (Backdrop-Filter kann teuer sein).</li>
+      <li>Für Formulare: <code>glass-input</code>/<code>glass-input-light</code> verwenden, Fokus-States mit Tailwind ergänzen.</li>
+    </ul>
+  </DocSection>
+
+  <DocSection id="basics" title="Basics" description=".glass / .glass-light">
+    <div class="docs-showcase">
+      <ComponentShowcase title="Basics" description=".glass / .glass-light" minHeight="10rem" showCodeInitially={true}>
+        <div slot="light"><div class="glass-light px-6 py-4 rounded-xl inline-block">.glass-light</div></div>
+        <div slot="dark"><div class="glass px-6 py-4 rounded-xl inline-block">.glass</div></div>
+        <template slot="code">
+{`<div class="glass">Inhalt</div>
+<div class="glass-light">Inhalt</div>`}
+        </template>
+      </ComponentShowcase>
+    </div>
+  </DocSection>
+
+  <DocSection id="cards" title="Cards" description=".glass-card / .glass-card-light">
+    <div class="docs-showcase">
+      <ComponentShowcase title="Cards" description="Vordefinierte Card-Komponenten" minHeight="12rem" showCodeInitially={true}>
+        <TokenControls slot="controls" />
+        <div slot="light">
+          <article class="glass-card-light">
+            <h3 class="text-lg font-semibold mb-1">Light Card</h3>
+            <p class="opacity-80">Light card with soft border.</p>
+          </article>
+        </div>
+        <div slot="dark">
+          <article class="glass-card">
+            <h3 class="text-lg font-semibold mb-1">Card</h3>
+            <p class="opacity-90">Dark card with blur & shadow.</p>
+          </article>
+        </div>
+        <template slot="code">
+{`<article class="glass-card">...</article>
+<article class="glass-card-light">...</article>`}
+        </template>
+      </ComponentShowcase>
+      <div style="margin-top:.5rem"><PlaygroundLink effect="glass-card" variant="light" pane="dark" /></div>
+    </div>
+  </DocSection>
+
+  <DocSection id="buttons" title="Buttons" description="High-contrast actions">
+    <div class="docs-showcase">
+      <ComponentShowcase title="Buttons" description="Kontraststarke Aktionen" minHeight="8rem" showCodeInitially={true}>
+        <div slot="light" class="flex gap-3 flex-wrap">
+          <button class="glass-button">Default</button>
+          <button class="glass-button-primary">Primary</button>
+          <button class="glass-button-secondary">Secondary</button>
+        </div>
+        <div slot="dark" class="flex gap-3 flex-wrap">
+          <button class="glass-button">Default</button>
+          <button class="glass-button-primary">Primary</button>
+          <button class="glass-button-secondary">Secondary</button>
+        </div>
+        <template slot="code">
+{`<button class="glass-button">Default</button>
+<button class="glass-button-primary">Primary</button>
+<button class="glass-button-secondary">Secondary</button>`}
+        </template>
+      </ComponentShowcase>
+      <div style="margin-top:.5rem;display:flex;gap:.5rem;flex-wrap:wrap">
+        <PlaygroundLink effect="button" pane="light" />
+        <PlaygroundLink effect="button" pane="dark" />
+      </div>
+    </div>
+  </DocSection>
+
+  <DocSection id="inputs" title="Inputs" description="Forms in light/dark">
+    <div class="docs-showcase">
+      <ComponentShowcase title="Inputs" description="Formulare in hell/dunkel" minHeight="12rem" initialTheme="light" showCodeInitially={true}>
+        <div slot="light" class="grid gap-3">
+          <input class="glass-input-light" placeholder="glass-input-light" />
+        </div>
+        <div slot="dark" class="grid gap-3">
+          <input class="glass-input" placeholder="glass-input (dark)" />
+        </div>
+        <template slot="code">
+{`<input class="glass-input" placeholder="..." />
+<input class="glass-input-light" placeholder="..." />`}
+        </template>
+      </ComponentShowcase>
+      <div style="margin-top:.5rem;display:flex;gap:.5rem;flex-wrap:wrap">
+        <PlaygroundLink effect="input" variant="light" pane="light" />
+        <PlaygroundLink effect="input" pane="dark" />
+      </div>
+    </div>
+  </DocSection>
+
+  <DocSection id="navigation" title="Navigation" description="Light/Dark navigation">
+    <div class="docs-showcase">
+      <ComponentShowcase title="Navigation" description="Light/Dark Nav" minHeight="10rem" showCodeInitially={true}>
+        <div slot="light">
+          <nav class="glass-nav-light p-3 flex gap-3">
+            <a href="#" class="active">Home</a><a href="#">Docs</a><a href="#">Blog</a>
+          </nav>
+        </div>
+        <div slot="dark">
+          <nav class="glass-nav p-3 flex gap-3">
+            <a href="#" class="active">Home</a><a href="#">Docs</a><a href="#">Blog</a>
+          </nav>
+        </div>
+        <template slot="code">
+{`<nav class="glass-nav">...</nav>
+<nav class="glass-nav-light">...</nav>`}
+        </template>
+      </ComponentShowcase>
+      <div style="margin-top:.5rem;display:flex;gap:.5rem;flex-wrap:wrap">
+        <PlaygroundLink preset="nav" pane="dark" />
+        <PlaygroundLink preset="nav-light" pane="light" />
+      </div>
+    </div>
+  </DocSection>
+
+  <DocSection id="utilities" title="Utilities & Specials" description="Textverläufe, Progress, Pulse/Glow/Sheen">
+    <div class="docs-showcase">
+      <ComponentShowcase title="Utilities" description="Text & Status" minHeight="10rem" showCodeInitially={true}>
+        <div slot="light" class="grid gap-3">
+          <div class="text-gradient text-2xl font-bold">.text-gradient</div>
+          <div class="text-accent-gradient text-2xl font-bold">.text-accent-gradient</div>
+          <div class="progress-rail"><div class="progress-fill" style="--progress-width: 60%"></div></div>
+        </div>
+        <div slot="dark" class="grid gap-3">
+          <div class="text-gradient text-2xl font-bold">.text-gradient</div>
+          <div class="text-accent-gradient text-2xl font-bold">.text-accent-gradient</div>
+          <div class="progress-rail"><div class="progress-fill" style="--progress-width: 60%"></div></div>
+          <div class="flex gap-2">
+            <div class="glass-card glass-pulse px-4 py-2">.glass-pulse</div>
+            <div class="glass-card glass-glow px-4 py-2">.glass-glow</div>
+            <div class="glass-card glass-sheen px-4 py-2">.glass-sheen</div>
+          </div>
+        </div>
+        <template slot="code">
+{`<div class="text-gradient">...</div>
+<div class="progress-rail"><div class="progress-fill" style="--progress-width:60%"></div></div>
+<div class="glass-card glass-pulse">...</div>`}
+        </template>
+      </ComponentShowcase>
+      <div style="margin-top:.5rem"><PlaygroundLink effect="utilities" pane="dark" /></div>
+    </div>
+  </DocSection>
+
+</DocsBase>
+<style is:global>
+  .theme-controls{display:flex;gap:.5rem;margin:1rem 0}
+  .tc-btn{appearance:none;border:1px solid var(--docs-border);background:linear-gradient(180deg,var(--docs-panel),var(--docs-panel-2));
+    color:var(--docs-text);border-radius:999px;padding:.45rem .75rem;cursor:pointer}
+  .tc-btn[aria-pressed="true"]{background:rgba(255,255,255,.1)}
+  /* hide per-showcase theme toggles; we control theme globally */
+  .docs-showcase .cs-controls [data-action="set-theme"]{display:none}
+</style>
+<script is:inline>
+  (function(){
+    const ready = (fn)=> (document.readyState==='loading' ? document.addEventListener('DOMContentLoaded', fn, {once:true}) : fn());
+    ready(()=>{
+      const setAll = (val) => {
+        document.querySelectorAll('.cs-root').forEach(root => {
+          const btn = root.querySelector(`[data-action="set-theme"][data-value="${val}"]`);
+          (btn)?.dispatchEvent(new MouseEvent('click', { bubbles:true, cancelable:true }));
+        });
+        document.querySelectorAll('[data-theme-all]').forEach(b => b.setAttribute('aria-pressed', b.getAttribute('data-theme-all')===val?'true':'false'));
+      };
+      document.querySelectorAll('[data-theme-all]').forEach(b => b.addEventListener('click', () => setAll(b.getAttribute('data-theme-all') || 'dark')));
+      // init dark
+      setAll('dark');
+    });
+  })();
+</script>

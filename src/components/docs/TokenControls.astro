@@ -1,0 +1,51 @@
+---
+export interface Props {
+  scope?: 'root' | 'light' | 'dark'
+}
+const { scope = 'root' } = Astro.props;
+---
+<div class="token-ctrls" data-scope={scope}>
+  <label class="ctrl">
+    <span class="lbl">Radius</span>
+    <input class="rng" type="range" min="0.5" max="3" step="0.05" value="1.25" data-var="--glass-radius" data-suffix="rem" />
+    <span class="val" data-for="--glass-radius">1.25rem</span>
+  </label>
+  <label class="ctrl">
+    <span class="lbl">Blur</span>
+    <input class="rng" type="range" min="0" max="24" step="1" value="12" data-var="--glass-blur" data-suffix="px" />
+    <span class="val" data-for="--glass-blur">12px</span>
+  </label>
+  <script is:inline>
+    (function(){
+      const ready = (fn)=> (document.readyState==='loading' ? document.addEventListener('DOMContentLoaded', fn, {once:true}) : fn());
+      ready(()=>{
+        const host = (document.currentScript?.previousElementSibling?.previousElementSibling?.previousElementSibling)?.parentElement;
+        // find nearest showcase root to keep scope local
+        const scopeEl = host?.closest?.('.cs-root');
+        const scopeAttr = host?.getAttribute?.('data-scope') || 'root';
+        const target = scopeAttr==='light' ? scopeEl?.querySelector('[data-pane="light"]') : scopeAttr==='dark' ? scopeEl?.querySelector('[data-pane="dark"]') : scopeEl;
+        if(!target) return;
+        host?.querySelectorAll('input.rng')?.forEach((inp) => {
+          const v = inp.getAttribute('data-var');
+          const suf = inp.getAttribute('data-suffix') || '';
+          const out = host.querySelector(`.val[data-for="${v}"]`);
+          const apply = () => {
+            const val = inp.value + suf;
+            target.style.setProperty(v, val);
+            if(out) out.textContent = val;
+          };
+          inp.addEventListener('input', apply);
+          apply();
+        });
+      });
+    })();
+  </script>
+  <style is:global>
+    .token-ctrls{display:flex;gap:.75rem;flex-wrap:wrap}
+    .ctrl{display:flex;gap:.5rem;align-items:center;color:#cbd5e1}
+    .ctrl .lbl{color:var(--docs-muted);font-size:.8rem}
+    .ctrl .rng{accent-color:#60a5fa}
+    .ctrl .val{font-variant-numeric:tabular-nums;color:#9fb4d1;font-size:.8rem}
+  </style>
+</div>
+

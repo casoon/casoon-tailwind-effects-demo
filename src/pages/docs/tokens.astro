@@ -1,0 +1,244 @@
+---
+import DocsBase from '../../layouts/DocsBase.astro';
+import ToC from '../../components/docs/ToC.astro';
+import DocSection from '../../components/docs/DocSection.astro';
+import Tips from '../../components/docs/Tips.astro';
+import CodeBlock from '../../components/docs/CodeBlock.astro';
+import TokenControls from '../../components/docs/TokenControls.astro';
+import ComponentShowcase from '../../components/ComponentShowcase.astro';
+import PlaygroundLink from '../../components/docs/PlaygroundLink.astro';
+---
+
+<DocsBase title="Docs – Tokens">
+  <h1>Tokens</h1>
+  <p class="lead">Central CSS variables to control glass effects. Define global defaults and override them contextually.</p>
+
+  <div class="theme-controls" role="group" aria-label="Theme">
+    <button type="button" class="tc-btn" data-theme-all="light">Light</button>
+    <button type="button" class="tc-btn" data-theme-all="dark" aria-pressed="true">Dark</button>
+  </div>
+
+  <ToC items={[
+    { id: 'globals', label: 'Globals' },
+    { id: 'glass', label: 'Glass' },
+    { id: 'ranges', label: 'Ranges' },
+    { id: 'examples', label: 'Examples' },
+    { id: 'dos', label: 'Do/Don’t' },
+    { id: 'scoping', label: 'Scoping' },
+  ]} />
+
+  <DocSection title="Design Tokens – Übersicht (^0.4.7)">
+    <p>Wesentliche Custom Properties für Glass-Effekte:</p>
+    <pre><code class="language-css">:root {
+  --glass-radius: 1.25rem;
+  --glass-blur: 12px;
+  --glass-border: rgba(255,255,255,.15);
+  --glass-bg: rgba(255,255,255,.08);
+}</code></pre>
+    <ul class="list-disc ml-6">
+      <li><code>--glass-radius</code> – Eckenradius von Glass-Elementen</li>
+      <li><code>--glass-blur</code> – Stärke des Hintergrund-Unschärfe-Effekts</li>
+      <li><code>--glass-border</code> – Randfarbe/-opazität</li>
+      <li><code>--glass-bg</code> – Hintergrundfarbe/-opazität der Glass-Flächen</li>
+    </ul>
+    <p class="mt-3 text-sm opacity-70">
+      Tokens lassen sich global (Root), thematisch (per Container) oder komponentenspezifisch (Inline-Override) definieren.
+    </p>
+  </DocSection>
+
+  <DocSection id="globals" title="Globals" description=":root – recommended defaults">
+    <CodeBlock lang="css" title=":root – Defaults">
+{`:root {
+  --glass-radius: 1.25rem;
+  --glass-blur: 12px;
+  --glass-border: rgba(255,255,255,.15);
+  --glass-bg: rgba(255,255,255,.08);
+}`}    
+    </CodeBlock>
+    <Tips items={[
+      'Keep defaults centralized — avoid hard-coded values in components.',
+      'Use approachable ranges: radius 0.5–2rem, blur 0–24px.',
+    ]} />
+  </DocSection>
+
+  <DocSection id="examples" title="Examples" description="Concrete token combinations for common UIs">
+    <div class="docs-showcase">
+      <ComponentShowcase title="Card – kompakt" description="kleiner Radius, moderater Blur" minHeight="10rem" initialTheme="light" showCodeInitially={true}>
+        <div slot="light">
+          <article class="glass-card-light p-6 rounded-xl" style="--glass-radius:.75rem;--glass-blur:8px">
+            <h3 class="text-lg font-semibold mb-1">Compact</h3>
+            <p class="opacity-80">Radius .75rem • Blur 8px</p>
+          </article>
+        </div>
+        <div slot="dark">
+          <article class="glass-card p-6 rounded-xl" style="--glass-radius:.75rem;--glass-blur:8px">
+            <h3 class="text-lg font-semibold mb-1">Compact</h3>
+            <p class="opacity-85">Radius .75rem • Blur 8px</p>
+          </article>
+        </div>
+        <template slot="code">
+{`<article class="glass-card p-6" style="--glass-radius:.75rem;--glass-blur:8px">
+  ...
+</article>`}
+        </template>
+      </ComponentShowcase>
+    </div>
+
+    <div class="docs-showcase">
+      <ComponentShowcase title="Modal – soft" description="größerer Radius, weicher Blur" minHeight="10rem" showCodeInitially={true}>
+        <div slot="light">
+          <div class="glass-card-light p-8 rounded-2xl" style="--glass-radius:2rem;--glass-blur:16px">
+            <h3 class="text-xl font-semibold mb-2">Note</h3>
+            <p class="opacity-80">Radius 2rem • Blur 16px</p>
+            <button class="glass-button-primary mt-3">OK</button>
+          </div>
+        </div>
+        <div slot="dark">
+          <div class="glass-card p-8 rounded-2xl" style="--glass-radius:2rem;--glass-blur:16px">
+            <h3 class="text-xl font-semibold mb-2">Note</h3>
+            <p class="opacity-85">Radius 2rem • Blur 16px</p>
+            <button class="glass-button-primary mt-3">OK</button>
+          </div>
+        </div>
+        <template slot="code">
+{`<div class="glass-card p-8" style="--glass-radius:2rem;--glass-blur:16px">
+  ...
+</div>`}
+        </template>
+      </ComponentShowcase>
+    </div>
+  </DocSection>
+
+  <DocSection id="glass" title="Glass" description="Relevante Variablen & Bereiche">
+    <ul class="prose">
+      <li><code>--glass-radius</code> – Eckenradius; Empfehlung: 0.5–2rem (Default 1.25rem)</li>
+      <li><code>--glass-blur</code> – Unschärfe; Empfehlung: 6–16px für gute Performance (Default 12px)</li>
+      <li><code>--glass-border</code> – Rahmenfarbe; z. B. rgba(255,255,255,.15)</li>
+      <li><code>--glass-bg</code> – Hintergrundfarbe; z. B. rgba(255,255,255,.08)</li>
+    </ul>
+
+    <div class="docs-showcase">
+      <TokenControls />
+      <div class="muted" style="margin:.5rem 0 1rem">Adjust radius/blur and observe changes in examples.</div>
+      <PlaygroundLink effect="glass-card" pane="dark" code={true} />
+    </div>
+  </DocSection>
+
+  <DocSection id="ranges" title="Empfohlene Wertebereiche" description="Pragmatische Defaults für gute Lesbarkeit & Performance">
+    <div class="prose" style="overflow:auto">
+      <table style="width:100%;border-collapse:collapse">
+        <thead>
+          <tr>
+            <th style="text-align:left;border-bottom:1px solid var(--docs-border);padding:.35rem .5rem">Token</th>
+            <th style="text-align:left;border-bottom:1px solid var(--docs-border);padding:.35rem .5rem">Recommended</th>
+            <th style="text-align:left;border-bottom:1px solid var(--docs-border);padding:.35rem .5rem">Default</th>
+            <th style="text-align:left;border-bottom:1px solid var(--docs-border);padding:.35rem .5rem">Note</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:.35rem .5rem"><code>--glass-radius</code></td>
+            <td style="padding:.35rem .5rem">0.5–2rem</td>
+            <td style="padding:.35rem .5rem">1.25rem</td>
+            <td style="padding:.35rem .5rem">Bigger for cards/modals; smaller for buttons/chips.</td>
+          </tr>
+          <tr>
+            <td style="padding:.35rem .5rem"><code>--glass-blur</code></td>
+            <td style="padding:.35rem .5rem">6–16px</td>
+            <td style="padding:.35rem .5rem">12px</td>
+            <td style="padding:.35rem .5rem">Higher = softer, but more expensive; reduce on mobile.</td>
+          </tr>
+          <tr>
+            <td style="padding:.35rem .5rem"><code>--glass-border</code></td>
+            <td style="padding:.35rem .5rem">rgba(255,255,255,.10–.20)</td>
+            <td style="padding:.35rem .5rem">rgba(255,255,255,.15)</td>
+            <td style="padding:.35rem .5rem">Tune to background contrast.</td>
+          </tr>
+          <tr>
+            <td style="padding:.35rem .5rem"><code>--glass-bg</code></td>
+            <td style="padding:.35rem .5rem">rgba(255,255,255,.06–.12)</td>
+            <td style="padding:.35rem .5rem">rgba(255,255,255,.08)</td>
+            <td style="padding:.35rem .5rem">Raise on very light BGs, lower on dark BGs.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </DocSection>
+
+  <DocSection id="examples" title="Beispiele" description="Konkrete Token‑Kombinationen für typische UIs">
+    <div class="docs-showcase">
+      <ComponentShowcase title="Buttons – kräftig" description="Akzentfarben via Tokens" minHeight="8rem">
+        <div slot="light" class="flex gap-3 flex-wrap" style="--glass-accent-from:#ff6b35;--glass-accent-to:#00d4ff">
+          <button class="glass-button">Default</button>
+          <button class="glass-button-primary">Primary</button>
+          <button class="glass-button-secondary">Secondary</button>
+        </div>
+        <div slot="dark" class="flex gap-3 flex-wrap" style="--glass-accent-from:#ff6b35;--glass-accent-to:#00d4ff">
+          <button class="glass-button">Default</button>
+          <button class="glass-button-primary">Primary</button>
+          <button class="glass-button-secondary">Secondary</button>
+        </div>
+        <template slot="code">
+{`<div style="--glass-accent-from:#ff6b35;--glass-accent-to:#00d4ff">
+  <button class="glass-button-primary">Jetzt starten</button>
+</div>`}
+        </template>
+      </ComponentShowcase>
+    </div>
+  </DocSection>
+
+  <DocSection id="dos" title="Do/Don’t" description="Kurz & praxisnah">
+    <div class="prose">
+      <h3>Do</h3>
+      <ul>
+        <li>Tokens zentral definieren und lokal überschreiben.</li>
+        <li>Light/Dark Varianten gezielt wählen (<code>.glass</code> vs <code>.glass-light</code>).</li>
+        <li>Kontrast prüfen (AA), besonders über Orbs/Verläufen.</li>
+      </ul>
+      <h3>Don’t</h3>
+      <ul>
+        <li>Kein exzessiver Blur auf mobilen Geräten.</li>
+        <li>Fokuszustände nicht entfernen.</li>
+        <li>Nicht alle Effekte gleichzeitig einsetzen – Akzente genügen.</li>
+      </ul>
+    </div>
+  </DocSection>
+
+  <DocSection id="scoping" title="Scoping" description="Lokale Overrides">
+    <CodeBlock lang="css" title="Sektion mit eigenen Werten">
+{`.pricing-section {
+  --glass-radius: 1rem;
+  --glass-blur: 10px;
+}
+.pricing-section .glass-card { border-radius: var(--glass-radius); }`}
+    </CodeBlock>
+    <Tips items={[
+      'Tokens möglichst nah an der verwendenden Sektion überschreiben.',
+      'Teams: Vorgaben als Design‑Tokens im Theme bündeln.',
+    ]} />
+  </DocSection>
+
+</DocsBase>
+<style is:global>
+  .theme-controls{display:flex;gap:.5rem;margin:1rem 0}
+  .tc-btn{appearance:none;border:1px solid var(--docs-border);background:linear-gradient(180deg,var(--docs-panel),var(--docs-panel-2));
+    color:var(--docs-text);border-radius:999px;padding:.45rem .75rem;cursor:pointer}
+  .tc-btn[aria-pressed="true"]{background:rgba(255,255,255,.1)}
+  .docs-showcase .cs-controls [data-action="set-theme"]{display:none}
+</style>
+<script is:inline>
+  (function(){
+    const ready = (fn)=> (document.readyState==='loading' ? document.addEventListener('DOMContentLoaded', fn, {once:true}) : fn());
+    ready(()=>{
+      const setAll = (val) => {
+        document.querySelectorAll('.cs-root').forEach(root => {
+          const btn = root.querySelector(`[data-action=\"set-theme\"][data-value=\"${val}\"]`);
+          (btn)?.dispatchEvent(new MouseEvent('click', { bubbles:true, cancelable:true }));
+        });
+        document.querySelectorAll('[data-theme-all]').forEach(b => b.setAttribute('aria-pressed', b.getAttribute('data-theme-all')===val?'true':'false'));
+      };
+      document.querySelectorAll('[data-theme-all]').forEach(b => b.addEventListener('click', () => setAll(b.getAttribute('data-theme-all') || 'dark')));
+      setAll('dark');
+    });
+  })();
+</script>

@@ -1,5 +1,7 @@
 # @casoon/tailwindcss-effects Demo
 
+[![CI](https://github.com/casoon/casoon-tailwind-effects-demo/actions/workflows/ci.yml/badge.svg)](https://github.com/casoon/casoon-tailwind-effects-demo/actions/workflows/ci.yml)
+
 > **⚠️ Alpha Stage** - This project is currently in active development. Features may change and bugs may exist. Not recommended for production use yet.
 
 A modern demo website showcasing the powerful CSS effects library `@casoon/tailwindcss-effects` built with Astro and Tailwind CSS v4.
@@ -107,6 +109,24 @@ Visit the demo to see all effects in action:
 - **[Astro](https://astro.build)** - Modern web framework
 - **[Tailwind CSS v4](https://tailwindcss.com)** - Utility-first CSS framework
 - **[@casoon/tailwindcss-effects](https://github.com/casoon/tailwindcss-effects)** - CSS effects library
+
+## 📚 Dokumentation & Beitrag
+
+- Konzept & Anforderungen: siehe `DOCS_CONCEPT.md`.
+- Autorenleitfaden (Templates, Bausteine, Checklisten): `DOCS_AUTHORING.md`.
+- Lokale Verifizierung:
+  - Dev: `npm run dev` → Seiten unter `/docs/*` prüfen
+  - Build: `npm run build`
+  - Docs‑Gate: `npm run docs:verify` (prüft, dass alle in den Docs verwendeten Effekt‑Klassen im Build vorhanden sind)
+  - CI: Prüft Build + Docs automatisch für PRs (`.github/workflows/ci.yml`)
+
+## 🔒 Kompatibilität
+
+- Die Dokumentation bildet ausschließlich die aktuell installierte Version von `@casoon/tailwindcss-effects` ab.
+- Es gibt keine Rückwärtskompatibilität für ältere Versionen; Beispiele dürfen sich mit Releases ändern.
+- Breaking Changes werden über Changelog und Migration beschrieben.
+- Der Gate `npm run docs:verify` stellt sicher, dass alle in der Doku verwendeten Klassen in der aktuell gebauten CSS vorhanden sind.
+- Der Versions‑Badge zeigt „Verifiziert mit <Version>“.
 
 ## 📱 Browser Support
 

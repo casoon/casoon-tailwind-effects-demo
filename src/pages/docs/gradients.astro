@@ -1,0 +1,100 @@
+---
+import DocsBase from '../../layouts/DocsBase.astro';
+import ToC from '../../components/docs/ToC.astro';
+import DocSection from '../../components/docs/DocSection.astro';
+import Tips from '../../components/docs/Tips.astro';
+import ComponentShowcase from '../../components/ComponentShowcase.astro';
+import PlaygroundLink from '../../components/docs/PlaygroundLink.astro';
+---
+
+<DocsBase title="Docs – Gradients">
+  <h1>Gradients</h1>
+  <p class="lead">Text and UI gradients. Focus on readability and accessibility.</p>
+  <div class="theme-controls" role="group" aria-label="Theme">
+    <button type="button" class="tc-btn" data-theme-all="light">Light</button>
+    <button type="button" class="tc-btn" data-theme-all="dark" aria-pressed="true">Dark</button>
+  </div>
+  <ToC items={[
+    { id: 'text-gradients', label: 'Text' },
+    { id: 'progress', label: 'Progress' },
+  ]} />
+
+  <Tips items={[
+    'Use gradients sparingly — great for headlines.',
+    'Ensure readability: adjust size/contrast.',
+    'Control progress with the CSS var --progress-width.',
+  ]} />
+
+  <DocSection title="Gradients – Überblick">
+    <p>
+      Die Bibliothek stellt kuratierte Gradients und Hintergrund-Effekte bereit, die ohne zusätzliche @apply-Direktiven genutzt werden können.
+      Gradients sind mit Tailwind-Utilities kombinierbar (z. B. <code>p-6</code>, <code>rounded-2xl</code>, <code>text-balance</code>).
+    </p>
+    <p class="mt-3 text-sm opacity-70">
+      Siehe auch <a class="underline" href="/docs/tokens">Tokens</a> zur Feinabstimmung (Farben, Opazität), sowie <a class="underline" href="/docs/guides/performance">Performance-Guides</a>.
+    </p>
+  </DocSection>
+
+  <DocSection id="text-gradients" title="Text Gradients" description="Highlight text with gradients">
+    <div class="docs-showcase">
+      <ComponentShowcase title="Text Gradients" description="Text with gradient" minHeight="8rem" initialTheme="light" showCodeInitially={true}>
+        <div slot="light" class="flex gap-6 items-center">
+          <div class="text-gradient text-3xl font-bold">.text-gradient</div>
+          <div class="text-accent-gradient text-3xl font-bold">.text-accent-gradient</div>
+        </div>
+        <div slot="dark" class="flex gap-6 items-center">
+          <div class="text-gradient text-3xl font-bold">.text-gradient</div>
+          <div class="text-accent-gradient text-3xl font-bold">.text-accent-gradient</div>
+        </div>
+        <template slot="code">
+{`<h2 class="text-gradient">Title</h2>
+<p class="text-accent-gradient">Accent</p>`}
+        </template>
+      </ComponentShowcase>
+      <div style="margin-top:.5rem"><PlaygroundLink effect="utilities" pane="dark" /></div>
+    </div>
+  </DocSection>
+
+  <DocSection id="progress" title="Progress / Rails" description="Verlaufsflächen für Status">
+    <div class="docs-showcase">
+      <ComponentShowcase title="Progress / Rails" description="Status-Komponente" minHeight="8rem" showCodeInitially={true}>
+        <div slot="light" class="w-full">
+          <div class="progress-rail"><div class="progress-fill" style="--progress-width: 60%"></div></div>
+        </div>
+        <div slot="dark" class="w-full">
+          <div class="progress-rail"><div class="progress-fill" style="--progress-width: 60%"></div></div>
+        </div>
+        <template slot="code">
+{`<div class="progress-rail">
+  <div class="progress-fill" style="--progress-width:60%"></div>
+</div>`}
+        </template>
+      </ComponentShowcase>
+      <div style="margin-top:.5rem"><PlaygroundLink effect="utilities" pane="dark" /></div>
+    </div>
+  </DocSection>
+
+</DocsBase>
+<style is:global>
+  .theme-controls{display:flex;gap:.5rem;margin:1rem 0}
+  .tc-btn{appearance:none;border:1px solid var(--docs-border);background:linear-gradient(180deg,var(--docs-panel),var(--docs-panel-2));
+    color:var(--docs-text);border-radius:999px;padding:.45rem .75rem;cursor:pointer}
+  .tc-btn[aria-pressed="true"]{background:rgba(255,255,255,.1)}
+  .docs-showcase .cs-controls [data-action="set-theme"]{display:none}
+</style>
+<script is:inline>
+  (function(){
+    const ready = (fn)=> (document.readyState==='loading' ? document.addEventListener('DOMContentLoaded', fn, {once:true}) : fn());
+    ready(()=>{
+      const setAll = (val) => {
+        document.querySelectorAll('.cs-root').forEach(root => {
+          const btn = root.querySelector(`[data-action=\"set-theme\"][data-value=\"${val}\"]`);
+          (btn)?.dispatchEvent(new MouseEvent('click', { bubbles:true, cancelable:true }));
+        });
+        document.querySelectorAll('[data-theme-all]').forEach(b => b.setAttribute('aria-pressed', b.getAttribute('data-theme-all')===val?'true':'false'));
+      };
+      document.querySelectorAll('[data-theme-all]').forEach(b => b.addEventListener('click', () => setAll(b.getAttribute('data-theme-all') || 'dark')));
+      setAll('dark');
+    });
+  })();
+</script>

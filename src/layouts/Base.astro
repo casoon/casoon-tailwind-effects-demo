@@ -7,16 +7,20 @@ const { title = "Casoon Effects Demo", navTheme = "light" } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <link rel="stylesheet" href="/src/styles/app.css" />
+    <link rel="stylesheet" href="/vendor/casoon-effects/index.css" />
   </head>
   <body class="bg-surface-subtle" style="min-height:100svh;">
     <header class="glass-header-overlay">
       <div class="container-demo">
-        <nav class={`glass ${navTheme === "light" ? "glass-light" : ""}`}>
-          <ul style="display:flex; gap:1rem; align-items:center; margin:0;">
-            <li><a href="/" class={Astro.url.pathname === "/" ? "active" : ""}>Home</a></li>
-            <li><a href="/components" class={Astro.url.pathname === "/components" ? "active" : ""}>Komponenten</a></li>
-            <li><a href="/playground" class={Astro.url.pathname === "/playground" ? "active" : ""}>Playground</a></li>
-          </ul>
+        <nav class={`${navTheme === 'light' ? 'glass-nav-light' : 'glass-nav'} p-3`}>
+          <a href="/" class={Astro.url.pathname === "/" ? "active" : ""}>Home</a>
+          <a href="/docs" class={Astro.url.pathname.startsWith("/docs") ? "active" : ""}>Docs</a>
+          <a href="/playground" class={Astro.url.pathname === "/playground" ? "active" : ""}>Playground</a>
+          <span style="margin-left:auto"></span>
+          <div class="theme-toggle" role="group" aria-label="Theme">
+            <button type="button" class="tt-btn" data-theme-all="light">Light</button>
+            <button type="button" class="tt-btn" data-theme-all="dark" aria-pressed="true">Dark</button>
+          </div>
         </nav>
       </div>
     </header>
@@ -27,4 +31,20 @@ const { title = "Casoon Effects Demo", navTheme = "light" } = Astro.props;
       <p>© {new Date().getFullYear()} Casoon Effects</p>
     </footer>
   </body>
+  <script is:inline>
+    (function(){
+      const ready = (fn)=> (document.readyState==='loading' ? document.addEventListener('DOMContentLoaded', fn, {once:true}) : fn());
+      ready(()=>{
+        const setAll = (val) => {
+          document.querySelectorAll('.cs-root').forEach(root => {
+            const btn = root.querySelector(`[data-action="set-theme"][data-value="${val}"]`);
+            (btn)?.dispatchEvent(new MouseEvent('click', { bubbles:true, cancelable:true }));
+          });
+          document.querySelectorAll('.theme-toggle [data-theme-all]').forEach(b => b.setAttribute('aria-pressed', b.getAttribute('data-theme-all')===val?'true':'false'));
+        };
+        document.querySelectorAll('.theme-toggle [data-theme-all]').forEach(b => b.addEventListener('click', () => setAll(b.getAttribute('data-theme-all') || 'dark')));
+        setAll('dark');
+      });
+    })();
+  </script>
 </html>

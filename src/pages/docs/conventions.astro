@@ -1,0 +1,58 @@
+---
+import DocsBase from '../../layouts/DocsBase.astro';
+import ToC from '../../components/docs/ToC.astro';
+import DocSection from '../../components/docs/DocSection.astro';
+import Tips from '../../components/docs/Tips.astro';
+import CodeBlock from '../../components/docs/CodeBlock.astro';
+---
+
+<DocsBase title="Docs – Conventions">
+  <h1>Conventions</h1>
+  <p class="lead">Naming, structure, and configurable tokens for consistent use of the effects.</p>
+
+  <ToC items={[
+    { id: 'naming', label: 'Naming' },
+    { id: 'tokens', label: 'Tokens' },
+    { id: 'a11y', label: 'Accessibility' },
+  ]} />
+
+  <DocSection id="naming" title="Naming" description="Klar strukturierte Klassennamen">
+    <ul class="prose">
+      <li><span class="code-inline">glass</span> base; variants: <span class="code-inline">.glass-light</span>, <span class="code-inline">.glass-card</span>, <span class="code-inline">.glass-card-light</span></li>
+      <li>Components: <span class="code-inline">.glass-button(-primary|-secondary)</span>, <span class="code-inline">.glass-input(-light)</span>, <span class="code-inline">.glass-nav(-light)</span></li>
+      <li>Backgrounds: <span class="code-inline">.bg-orbs-hero</span></li>
+      <li>Gradients: <span class="code-inline">.text-gradient</span>, <span class="code-inline">.text-accent-gradient</span>, <span class="code-inline">.progress-rail</span> + <span class="code-inline">.progress-fill</span></li>
+    </ul>
+  </DocSection>
+
+  <DocSection id="tokens" title="Tokens" description="CSS custom properties for customization">
+    <CodeBlock lang="css" title=":root – globale Defaults">
+{`:root {
+  --glass-radius: 1.25rem;
+  --glass-blur: 12px;
+  --glass-border: rgba(255,255,255,.15);
+  --glass-bg: rgba(255,255,255,.08);
+}`}
+    </CodeBlock>
+    <Tips items={[
+      'Override tokens locally: set values on a container scope.',
+      'Design system: define values centrally in your theme and reuse.',
+    ]} />
+    <CodeBlock lang="css" title="lokaler Scope">
+{`.pricing-section {
+  --glass-radius: 1rem;
+  --glass-blur: 10px;
+}
+.pricing-section .glass-card { /* nutzt obige Variablen */ }`}
+    </CodeBlock>
+  </DocSection>
+
+  <DocSection id="a11y" title="Accessibility" description="Readability & interaction">
+    <Tips items={[
+      'Check contrast — especially over orbs and gradients.',
+      'Keep focus states visible; don’t remove outlines.',
+      'Keep motion subtle; respect prefers-reduced-motion.',
+    ]} />
+  </DocSection>
+
+</DocsBase>

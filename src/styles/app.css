@@ -1,8 +1,7 @@
 /* Tailwind v4 first */
 @import "tailwindcss";
 
-/* Import the complete @casoon/tailwindcss-effects library */
-@import "@casoon/tailwindcss-effects/index.css";
+/* Effects CSS wird in dev/production als statisches Asset aus /public geladen */
 
 /* Custom header overlay styles */
 .glass-header-overlay {
@@ -22,28 +21,7 @@
   align-items: center;
 }
 
-.glass-header-overlay nav a {
-  color: inherit;
-  text-decoration: none;
-  font-weight: 500;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  transition: all 0.2s ease;
-  margin-right: 0.5rem;
-}
-
-.glass-header-overlay nav a:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: translateY(-1px);
-}
-
-.glass-header-overlay nav a.active {
-  background: linear-gradient(135deg, #ff6b35, #00d4ff);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: 600;
-}
+/* Navigation links styling is provided by .glass-nav / .glass-nav-light */
 
 /* Glass input styles compatible with @casoon/tailwindcss-effects */
 .glass-input {

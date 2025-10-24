@@ -1,0 +1,19 @@
+---
+export interface Props { title?: string; items?: string[] }
+const { title = 'Tipps', items = [] } = Astro.props;
+---
+{(items.length > 0 || true) && (
+  <aside class="tips" aria-label={title}>
+    <div class="tips-title">{title}</div>
+    <div class="tips-body">
+      {items.length > 0 ? (
+        <ul>
+          {items.map((t) => (<li>{t}</li>))}
+        </ul>
+      ) : (
+        <slot />
+      )}
+    </div>
+  </aside>
+)}
+

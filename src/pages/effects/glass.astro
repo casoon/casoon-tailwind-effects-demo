@@ -51,14 +51,14 @@ import Base from '../../layouts/Base.astro';
           <div class="row">
             <div class="glass-light px-6 py-4">.glass-light</div>
             <div class="glass-card-light px-6 py-4">.glass-card-light</div>
-            <div class="glass-card-light-enhanced" style="min-width:16rem">
-              <h3 class="text-lg font-semibold">.glass-card-light-enhanced</h3>
-              <p class="text-sm">Mit Gradient-Sheen oben.</p>
+            <div class="glass-card-light" style="min-width:16rem">
+              <h3 class="text-lg font-semibold">.glass-card-light</h3>
+              <p class="text-sm">Helle Karte für dunkle Hintergründe.</p>
             </div>
           </div>
           <pre class="code">{`<div class="glass-light">...</div>
 <div class="glass-card-light">...</div>
-<div class="glass-card-light-enhanced">...</div>`}</pre>
+`}</pre>
         </div>
       </div>
     </section>
@@ -139,22 +139,17 @@ import Base from '../../layouts/Base.astro';
           <div class="row" style="min-width:18rem">
             <input class="glass-input" placeholder="glass-input (dark)" />
             <div class="input-container" style="min-width:18rem">
-              <input class="glass-input-enhanced" placeholder="glass-input-enhanced" />
+              
               <span class="input-icon">🔍</span>
             </div>
           </div>
-          <pre class="code">{`<input class="glass-input" placeholder="..." />
-<div class="input-container">
-  <input class="glass-input-enhanced" placeholder="..." />
-  <span class="input-icon">🔍</span>
-</div>`}</pre>
+          <pre class="code">{`<input class="glass-input" placeholder="..." />`}</pre>
         </div>
 
         <!-- Light -->
         <div class="demo-swatch demo-light stack">
           <div class="row" style="min-width:18rem">
             <input class="glass-input-light" placeholder="glass-input-light" />
-            <input class="glass-input" placeholder="glass-input in light bg" />
           </div>
           <pre class="code">{`<input class="glass-input-light" placeholder="..." />
 <input class="glass-input" placeholder="..." />`}</pre>
@@ -173,19 +168,7 @@ import Base from '../../layouts/Base.astro';
             <a href="#">Docs</a>
             <a href="#">Blog</a>
           </nav>
-          <nav class="glass-nav-dark p-3 row">
-            <a href="#" class="active">Home</a>
-            <a href="#">Docs</a>
-            <a href="#">Blog</a>
-          </nav>
-          <nav class="glass-nav-enhanced p-3 row">
-            <a class="nav-link" href="#">Home</a>
-            <a class="nav-link" href="#">Docs</a>
-            <a class="nav-link-primary" href="#">Get started</a>
-          </nav>
-          <pre class="code">{`<nav class="glass-nav">...</nav>
-<nav class="glass-nav-dark">...</nav>
-<nav class="glass-nav-enhanced">...</nav>`}</pre>
+          <pre class="code">{`<nav class="glass-nav">...</nav>`}</pre>
         </div>
 
         <!-- Light -->

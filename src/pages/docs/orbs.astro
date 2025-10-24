@@ -1,0 +1,111 @@
+---
+import DocsBase from '../../layouts/DocsBase.astro';
+import ToC from '../../components/docs/ToC.astro';
+import DocSection from '../../components/docs/DocSection.astro';
+import Tips from '../../components/docs/Tips.astro';
+import ComponentShowcase from '../../components/ComponentShowcase.astro';
+import PlaygroundLink from '../../components/docs/PlaygroundLink.astro';
+---
+
+<DocsBase title="Docs – Orbs">
+  <h1>Orbs</h1>
+  <p class="lead">Background orbs for heroes and sections. Examples show the classes only — the docs UI itself does not use effect styles.</p>
+
+  <div class="theme-controls" role="group" aria-label="Theme">
+    <button type="button" class="tc-btn" data-theme-all="light">Light</button>
+    <button type="button" class="tc-btn" data-theme-all="dark" aria-pressed="true">Dark</button>
+  </div>
+
+  <ToC items={[
+    { id: 'hero', label: 'Hero Orbs' },
+    { id: 'parallax', label: 'Parallax' },
+  ]} />
+
+  <Tips items={[
+    'Set sufficient height (e.g. min-h-[30vh]) for visible orbs.',
+    'Combine with strong outline or contrast for text.',
+  ]} />
+
+  <DocSection title="Orbs/Backgrounds – Klassenreferenz (^0.4.7)">
+    <ul class="list-disc ml-6">
+      <li><code>bg-orbs-hero</code> – Auffällige, animierte Hintergrund-Orbs (Hero/Sections)</li>
+      <li><code>bg-orbs-subtle</code> – Zurückhaltende, performante Variante</li>
+    </ul>
+    <p class="mt-3 text-sm opacity-70">
+      Die Orbs wirken am besten hinter kontrastreichen Vordergrund-Komponenten (z. B. <code>glass-card</code>).
+    </p>
+  </DocSection>
+
+  <DocSection title="Integration & Performance">
+    <ul class="list-disc ml-6">
+      <li>Setze Orbs auf Container-Ebene (Section/Div) und kontrolliere Padding/Maskierung mit Tailwind.</li>
+      <li>Beachte Bewegungspräferenzen: reduziere Animationen bei <code>@media (prefers-reduced-motion)</code>.</li>
+      <li>Teste auf mobilen Geräten; ggf. <code>bg-orbs-subtle</code> für bessere Performance verwenden.</li>
+    </ul>
+  </DocSection>
+
+  <DocSection id="hero" title="Hero Orbs" description="Dominant effect for heroes">
+    <div class="docs-showcase">
+      <ComponentShowcase title="Hero Orbs" description="Full-bleed area" fullBleed={true} minHeight="30vh" showCodeInitially={true}>
+        <div slot="light">
+          <section class="bg-orbs-hero flex items-center justify-center min-h-[30vh]">
+            <h3 class="text-2xl font-bold">.bg-orbs-hero</h3>
+          </section>
+        </div>
+        <div slot="dark">
+          <section class="bg-orbs-hero flex items-center justify-center min-h-[30vh]">
+            <h3 class="text-2xl font-bold">.bg-orbs-hero</h3>
+          </section>
+        </div>
+        <template slot="code">
+{`<section class="bg-orbs-hero min-h-[30vh]">...</section>`}
+        </template>
+      </ComponentShowcase>
+      <div style="margin-top:.5rem"><PlaygroundLink preset="orbs-hero" pane="dark" /></div>
+    </div>
+  </DocSection>
+
+  <DocSection id="parallax" title="Parallax" description="CSS-only parallax background">
+    <div class="docs-showcase">
+      <ComponentShowcase title="Parallax Orbs" description="Scrolling, CSS-only" fullBleed={true} minHeight="30vh" showCodeInitially={true}>
+        <div slot="light">
+          <section class="bg-orbs-parallax flex items-center justify-center min-h-[30vh]">
+            <h3 class="text-2xl font-bold">.bg-orbs-parallax</h3>
+          </section>
+        </div>
+        <div slot="dark">
+          <section class="bg-orbs-parallax flex items-center justify-center min-h-[30vh]">
+            <h3 class="text-2xl font-bold">.bg-orbs-parallax</h3>
+          </section>
+        </div>
+        <template slot="code">
+{`<section class="bg-orbs-parallax min-h-[30vh]">...</section>`}
+        </template>
+      </ComponentShowcase>
+    </div>
+  </DocSection>
+
+</DocsBase>
+<style is:global>
+  .theme-controls{display:flex;gap:.5rem;margin:1rem 0}
+  .tc-btn{appearance:none;border:1px solid var(--docs-border);background:linear-gradient(180deg,var(--docs-panel),var(--docs-panel-2));
+    color:var(--docs-text);border-radius:999px;padding:.45rem .75rem;cursor:pointer}
+  .tc-btn[aria-pressed="true"]{background:rgba(255,255,255,.1)}
+  .docs-showcase .cs-controls [data-action="set-theme"]{display:none}
+</style>
+<script is:inline>
+  (function(){
+    const ready = (fn)=> (document.readyState==='loading' ? document.addEventListener('DOMContentLoaded', fn, {once:true}) : fn());
+    ready(()=>{
+      const setAll = (val) => {
+        document.querySelectorAll('.cs-root').forEach(root => {
+          const btn = root.querySelector(`[data-action=\"set-theme\"][data-value=\"${val}\"]`);
+          (btn)?.dispatchEvent(new MouseEvent('click', { bubbles:true, cancelable:true }));
+        });
+        document.querySelectorAll('[data-theme-all]').forEach(b => b.setAttribute('aria-pressed', b.getAttribute('data-theme-all')===val?'true':'false'));
+      };
+      document.querySelectorAll('[data-theme-all]').forEach(b => b.addEventListener('click', () => setAll(b.getAttribute('data-theme-all') || 'dark')));
+      setAll('dark');
+    });
+  })();
+</script>

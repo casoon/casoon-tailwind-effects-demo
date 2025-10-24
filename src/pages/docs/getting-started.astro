@@ -1,0 +1,143 @@
+---
+import DocsBase from '../../layouts/DocsBase.astro';
+import ToC from '../../components/docs/ToC.astro';
+import DocSection from '../../components/docs/DocSection.astro';
+import Tips from '../../components/docs/Tips.astro';
+import CodeBlock from '../../components/docs/CodeBlock.astro';
+---
+
+<DocsBase title="Docs – Getting Started">
+  <h1>Getting Started</h1>
+  <p class="lead">Quick start with Astro + Tailwind v4 and <span class="code-inline">@casoon/tailwindcss-effects</span>. The docs UI stays neutral; examples only show the effects.</p>
+
+  <ToC items={[
+    { id: 'install', label: 'Install' },
+    { id: 'astro-tailwind', label: 'Astro + Tailwind' },
+    { id: 'import-css', label: 'Import CSS' },
+    { id: 'content-scan', label: 'Content Scan' },
+    { id: 'first-usage', label: 'First Usage' },
+    { id: 'frameworks', label: 'Framework Variants' },
+    { id: 'verify', label: 'Verification' },
+  ]} />
+
+  <DocSection title="Installation & Einbindung (Tailwind v4)">
+    <ol class="list-decimal ml-6 space-y-2">
+      <li>Abhängigkeiten installieren: <code>npm install</code></li>
+      <li>Sicherstellen, dass Tailwind v4 eingebunden ist (z. B. globales Stylesheet mit <code>@import "tailwindcss";</code>).</li>
+      <li>Effekte einbinden:
+        <ul class="list-disc ml-6 mt-2">
+          <li>Direkt aus der Bibliothek:
+            <CodeBlock lang="css" title="src/styles/app.css">
+{`@import "tailwindcss";
+@import "@casoon/tailwindcss-effects/index.css";`}
+            </CodeBlock>
+          </li>
+          <li>Alternativ (gebündelte CSS, falls vorhanden): 
+            <CodeBlock lang="css" title="src/styles/app.css">
+{`@import "tailwindcss";
+/* gebündelte CSS aus public verwenden */
+@import "/vendor/casoon-effects/index.css";`}
+            </CodeBlock>
+          </li>
+        </ul>
+      </li>
+      <li>Entwicklungsserver starten: <code>npm run dev</code> und Beispiele unter <code>/docs/*</code> prüfen.</li>
+    </ol>
+    <p class="mt-4 text-sm opacity-70">
+      Hinweis: Diese Doku spiegelt die in diesem Projekt installierte Version wider. Änderungen zwischen Versionen sind in
+      <a class="underline" href="/docs/changelog">Changelog</a> und <a class="underline" href="/docs/migration">Migration</a> dokumentiert.
+    </p>
+  </DocSection>
+
+  <DocSection id="install" title="Install">
+    <CodeBlock lang="bash" title="Bibliothek installieren">
+{`npm i @casoon/tailwindcss-effects`}
+    </CodeBlock>
+  </DocSection>
+
+  <DocSection id="astro-tailwind" title="Astro + Tailwind" description="Tailwind v4 via Vite Plugin in Astro">
+    <CodeBlock lang="js" title="astro.config.mjs">
+{`import { defineConfig } from 'astro/config'
+import tailwind from '@tailwindcss/vite'
+
+export default defineConfig({
+  vite: { plugins: [tailwind()] }
+})`}
+    </CodeBlock>
+  </DocSection>
+
+  <DocSection id="import-css" title="Import CSS" description="Include Tailwind v4 and the effects">
+    <CodeBlock lang="css" title="src/styles/app.css">
+{`@import "tailwindcss";
+@import "@casoon/tailwindcss-effects/index.css";`}
+    </CodeBlock>
+    <Tips items={["Ensure the CSS file is linked in your layout (e.g. <link rel=\"stylesheet\" href=\"/src/styles/app.css\" />)."]} />
+  </DocSection>
+
+  <DocSection id="content-scan" title="Content Scan" description="Files that Tailwind should scan for classes">
+    <CodeBlock lang="js" title="tailwind.config.mjs">
+{`export default {
+  content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+  theme: { extend: {} },
+};`}
+    </CodeBlock>
+  </DocSection>
+
+  <DocSection id="first-usage" title="First Usage" description="Quick example on a page">
+    <CodeBlock lang="html" title="Markup">
+{`<section class="bg-orbs-hero min-h-[40vh] flex items-center justify-center">
+  <div class="glass-card p-8 rounded-2xl text-center">
+    <h2 class="text-3xl font-bold mb-2">Hello Casoon</h2>
+    <p class="opacity-90 mb-4">Glass + Orbs combined</p>
+    <button class="glass-button-primary">Get started</button>
+  </div>
+</section>`}
+    </CodeBlock>
+  </DocSection>
+
+  <DocSection id="a11y-note" title="A11y note" description="Contrast on light backgrounds">
+    <Tips items={[
+      'On light backgrounds prefer .glass-light (and .glass-input-light) for better contrast; use .glass on dark backgrounds.'
+    ]} />
+  </DocSection>
+
+  <DocSection id="frameworks" title="Framework Variants" description="Vite + React example">
+    <CodeBlock lang="ts" title="vite.config.ts">
+{`import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import tailwind from '@tailwindcss/vite'
+
+export default defineConfig({
+  plugins: [react(), tailwind()]
+})`}
+    </CodeBlock>
+    <CodeBlock lang="css" title="src/index.css">
+{`@import "tailwindcss";
+@import "@casoon/tailwindcss-effects/index.css";`}
+    </CodeBlock>
+    <CodeBlock lang="tsx" title="src/main.tsx">
+{`import React from 'react'
+import ReactDOM from 'react-dom/client'
+import './index.css'
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <div className="bg-orbs-hero min-h-[40vh] grid place-items-center">
+      <div className="glass-card p-6 rounded-xl text-center">
+        <h1 className="text-2xl font-bold mb-2">Casoon Effects</h1>
+        <button className="glass-button-primary">Start</button>
+      </div>
+    </div>
+  </React.StrictMode>
+)`}
+    </CodeBlock>
+  </DocSection>
+
+  <DocSection id="verify" title="Verification" description="Docs in sync with the library?">
+    <p class="muted">This project verifies that classes used in docs exist in the built CSS.</p>
+    <CodeBlock lang="bash" title="Check ausführen">
+{`npm run docs:check`}
+    </CodeBlock>
+  </DocSection>
+
+</DocsBase>

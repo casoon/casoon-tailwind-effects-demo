@@ -1,0 +1,36 @@
+---
+export interface Props { lang?: string; title?: string }
+const { lang = 'bash', title } = Astro.props;
+---
+<div class="codeblock" data-lang={lang}>
+  <div class="codeblock-bar">
+    <span class="codeblock-badge">{(lang || 'code').toUpperCase()}</span>
+    {title && <span class="codeblock-title">{title}</span>}
+    <button class="codeblock-copy" type="button">Copy</button>
+  </div>
+  <pre class="codeblock-pre"><code><slot /></code></pre>
+  <script is:inline>
+    (function(){
+      const host = document.currentScript?.previousElementSibling?.previousElementSibling?.parentElement;
+      if(!host) return;
+      const copyBtn = host.querySelector('.codeblock-copy');
+      const pre = host.querySelector('pre');
+      copyBtn?.addEventListener('click', async () => {
+        const text = (pre?.innerText || '').trim();
+        try { await navigator.clipboard.writeText(text); } catch {}
+        const old = copyBtn.textContent; copyBtn.textContent = 'Kopiert';
+        setTimeout(()=> copyBtn.textContent = old, 900);
+      });
+    })();
+  </script>
+  <style is:global>
+    .codeblock{border:1px solid var(--docs-border);border-radius:var(--docs-radius);overflow:hidden;background:#0b1220;margin:1rem 0}
+    .codeblock-bar{display:flex;align-items:center;justify-content:space-between;gap:.5rem;padding:.5rem .75rem;border-bottom:1px solid var(--docs-border);background:linear-gradient(180deg,var(--docs-panel),var(--docs-panel-2))}
+    .codeblock-badge{font-size:.75rem;padding:.15rem .45rem;border-radius:6px;color:#cbd5e1;border:1px solid var(--docs-border);background:rgba(255,255,255,.04)}
+    .codeblock-title{color:var(--docs-muted);font-size:.85rem}
+    .codeblock-copy{appearance:none;border:1px solid var(--docs-border);background:rgba(255,255,255,.06);color:var(--docs-text);border-radius:8px;padding:.35rem .65rem;font-size:.825rem;cursor:pointer}
+    .codeblock-copy:hover{background:rgba(255,255,255,.1)}
+    .codeblock-pre{margin:0;padding:1rem;color:#e5e7eb;font-size:.9rem;overflow:auto;font-family:ui-monospace,Menlo,Monaco,Consolas,monospace}
+  </style>
+</div>
+

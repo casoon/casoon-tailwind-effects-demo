@@ -10,13 +10,13 @@ import Base from '../layouts/Base.astro';
           Interactive Playground
         </h1>
         <p style="font-size: clamp(1.125rem, 2.5vw, 1.5rem); margin: 0; color: #475569; max-width: 48rem; margin-inline: auto;">
-          Experimentiere mit den CSS-Custom-Properties der Glass-Effekte und sieh das Ergebnis in Echtzeit
+          Experiment with CSS custom properties for glass effects and see changes live.
         </p>
       </div>
 
       <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; align-items: start;">
         <aside class="playground">
-          <h3 style="margin: 0 0 1.5rem; color: #1e293b; font-size: 1.25rem;">Token Anpassung</h3>
+          <h3 style="margin: 0 0 1.5rem; color: #1e293b; font-size: 1.25rem;">Token adjustments</h3>
           
           <label>Radius (rem)</label>
           <input type="range" min="0.25" max="2" step="0.05" value="0.85" style="--glass-radius: 0.85rem;">
@@ -36,21 +36,67 @@ import Base from '../layouts/Base.astro';
             <label>Accent To</label>
             <input type="color" value="#00d4ff" style="--glass-accent-to: #00d4ff;">
           </div>
-          <div class="value-display">--glass-accent-to</div>
+        <div class="value-display">--glass-accent-to</div>
 
           <div class="tip-section">
-            <h4>Tipp</h4>
-            <p>Ändere die Werte und beobachte, wie sich die Glass-Effekte in Echtzeit anpassen. Perfekt zum Experimentieren mit verschiedenen Designs.</p>
+            <h4>Tip</h4>
+            <p>Change values and see glass effects update in real time. Great for trying designs.</p>
           </div>
-        </aside>
+        <hr style="border:none;border-top:1px solid rgba(15,23,42,.12);margin:1.25rem 0" />
+        <h3 style="margin: 0 0 1rem; color: #1e293b; font-size: 1.1rem;">Ansicht & Auswahl</h3>
+        <div class="row" style="gap:.5rem;align-items:center">
+          <label style="min-width:5.5rem">Pane</label>
+          <div class="seg">
+            <button type="button" data-pane-btn value="light">Light</button>
+            <button type="button" data-pane-btn value="dark" aria-pressed="true">Dark</button>
+          </div>
+        </div>
+        <div class="row">
+          <label for="pg-effect">Effect</label>
+          <select id="pg-effect">
+            <option value="glass-card">glass-card</option>
+            <option value="utilities">utilities</option>
+            <option value="button">button</option>
+          </select>
+        </div>
+        <div class="row">
+          <label for="pg-variant">Variant</label>
+          <select id="pg-variant">
+            <option value="">default</option>
+            <option value="light">light</option>
+          </select>
+        </div>
+        <div class="row" style="align-items:center">
+          <input id="pg-code" type="checkbox" />
+          <label for="pg-code">Code anzeigen</label>
+        </div>
 
-        <div class="live-preview">
-          <h3>Live Preview</h3>
-          <p>Ändere die Token-Werte links und beobachte, wie sich die Glass-Effekte sofort anpassen.</p>
-          <div class="buttons">
-            <button class="btn btn-neutral">Neutral</button>
-            <button class="btn btn-primary">Primary</button>
+        <hr style="border:none;border-top:1px solid rgba(15,23,42,.12);margin:1.25rem 0" />
+        <h3 style="margin: 0 0 1rem; color: #1e293b; font-size: 1.1rem;">Presets</h3>
+        <div class="row">
+          <label for="pg-preset">Preset</label>
+          <select id="pg-preset">
+            <option value="">— none —</option>
+            <option value="orbs-hero">Orbs Hero</option>
+            <option value="orbs-parallax">Orbs Parallax</option>
+            <option value="hero-cta">Hero + CTA</option>
+            <option value="feature-grid">Feature Grid</option>
+            <option value="login-card">Login Card</option>
+            <option value="nav">Navigation (dark)</option>
+            <option value="nav-light">Navigation (light)</option>
+            <option value="glass-sizes-shadows">Glass Sizes & Shadows</option>
+          </select>
+        </div>
+      </aside>
+
+        <div class="live-preview" data-pane="dark">
+          <div class="lp-head">
+            <h3>Live Preview</h3>
+            <div class="lp-meta"><span class="badge" data-id="pane-badge">dark</span></div>
           </div>
+          <p>Adjust tokens on the left and see updates. Deep‑links can preselect the view.</p>
+          <div id="demo-target" class="demo-target"></div>
+          <details id="demo-code" class="demo-code"><summary>Code</summary><pre><code id="demo-code-text"></code></pre></details>
         </div>
       </div>
 
@@ -61,11 +107,11 @@ import Base from '../layouts/Base.astro';
             <span>Nav</span>
             <span>Links</span>
           </div>
-          <p>Auch die Navigation reagiert auf die Token-Änderungen.</p>
+          <p>The navigation reacts to token changes as well.</p>
         </div>
 
         <div class="css-variables">
-          <h4>Verfügbare CSS-Variablen</h4>
+          <h4>Available CSS variables</h4>
           <div class="variable-list">
             <div class="variable-item">
               <span class="variable-name">--glass-radius</span>
@@ -77,15 +123,190 @@ import Base from '../layouts/Base.astro';
             </div>
             <div class="variable-item">
               <span class="variable-name">--glass-accent-from</span>
-              <span class="variable-range">CSS-Farben</span>
+              <span class="variable-range">CSS colors</span>
             </div>
             <div class="variable-item">
               <span class="variable-name">--glass-accent-to</span>
-              <span class="variable-range">CSS-Farben</span>
+              <span class="variable-range">CSS colors</span>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <script is:inline>
+    (function(){
+      const qs = new URLSearchParams(location.search);
+      let state = {
+        pane: qs.get('pane') || 'dark',
+        effect: qs.get('effect') || 'glass-card',
+        variant: qs.get('variant') || '',
+        code: qs.get('code') === '1',
+        preset: qs.get('preset') || '',
+      };
+      const lp = document.querySelector('.live-preview');
+      const badge = document.querySelector('[data-id="pane-badge"]');
+      const target = document.getElementById('demo-target');
+      const codeBox = document.getElementById('demo-code');
+      const codeText = document.getElementById('demo-code-text');
+      const effectSel = document.getElementById('pg-effect');
+      const variantSel = document.getElementById('pg-variant');
+      const codeChk = document.getElementById('pg-code');
+      const paneBtns = Array.from(document.querySelectorAll('[data-pane-btn]'));
+      const presetSel = document.getElementById('pg-preset');
+
+      const applyPane = (v) => {
+        if (!v) return;
+        lp?.setAttribute('data-pane', v);
+        if (badge) badge.textContent = v;
+      };
+
+      const setDemo = (html) => {
+        if (!target) return;
+        target.innerHTML = html;
+        if (codeText) codeText.textContent = html.trim();
+        if (codeBox) codeBox.open = !!state.code;
+      };
+
+      const renderPreset = () => {
+        switch (state.preset) {
+          case 'orbs-hero':
+            return `<section class="bg-orbs-hero min-h-[40vh] grid place-items-center">\n  <h2 class="text-3xl font-bold">.bg-orbs-hero</h2>\n</section>`;
+          case 'hero-cta':
+            return `<section class=\"bg-orbs-hero min-h-[40vh] flex items-center justify-center\">
+  <div class=\"glass-card p-8 rounded-2xl text-center\">
+    <h2 class=\"text-3xl font-bold mb-2\">Dein Produkt</h2>
+    <p class=\"opacity-90 mb-4\">Kurzer Nutzen‑Pitch in einem Satz.</p>
+    <button class=\"glass-button-primary\">Jetzt starten</button>
+  </div>
+</section>`;
+          case 'feature-grid':
+            return `<div class=\"grid md:grid-cols-3 gap-4\">
+  <article class=\"glass-card p-6 rounded-xl\"><h3>Feature A</h3><p>Beschreibung</p></article>
+  <article class=\"glass-card-light p-6 rounded-xl\"><h3>Feature B</h3><p>Beschreibung</p></article>
+  <article class=\"glass-card p-6 rounded-xl\"><h3>Feature C</h3><p>Beschreibung</p></article>
+</div>`;
+          case 'login-card':
+            return `<form class=\"glass-card p-6 rounded-xl grid gap-3 w-[22rem] max-w-full\">
+  <input class=\"glass-input\" placeholder=\"E‑Mail\" />
+  <input class=\"glass-input\" type=\"password\" placeholder=\"Passwort\" />
+  <button class=\"glass-button-primary\">Login</button>
+</form>`;
+          case 'nav':
+            return `<nav class=\"glass-nav p-3 flex gap-3\">
+  <a href=\"#\" class=\"active\">Home</a><a href=\"#\">Docs</a><a href=\"#\">Blog</a>
+</nav>`;
+          case 'nav-light':
+            return `<nav class=\"glass-nav-light p-3 flex gap-3\">
+  <a href=\"#\" class=\"active\">Home</a><a href=\"#\">Docs</a><a href=\"#\">Blog</a>
+</nav>`;
+          default:
+            return '';
+        }
+      };
+
+      const render = () => {
+        const presetHtml = renderPreset();
+        if (presetHtml) {
+          setDemo(presetHtml);
+          return;
+        }
+        const { effect, variant } = state;
+        if (!effect) return;
+        switch (effect) {
+          case 'glass-card': {
+            const cls = variant === 'light' ? 'glass-card-light' : 'glass-card';
+            setDemo(`<article class=\"${cls} p-6 rounded-xl\"><h3>Demo</h3><p>${cls}</p></article>`);
+            break;
+          }
+          case 'input': {
+            const cls = variant === 'light' ? 'glass-input-light' : 'glass-input';
+            setDemo(`<div class=\"grid gap-3\"><input class=\"${cls}\" placeholder=\"${cls}\" /></div>`);
+            break;
+          }
+          case 'utilities': {
+            setDemo(`<div class=\"text-gradient text-2xl font-bold\">.text-gradient</div>`);
+            break;
+          }
+          default: {
+            setDemo(`<button class=\"glass-button\">Button</button>`);
+          }
+        }
+      };
+
+      const syncControlsFromState = () => {
+        effectSel && (effectSel.value = state.effect);
+        variantSel && (variantSel.value = state.variant || '');
+        codeChk && (codeChk.checked = !!state.code);
+        paneBtns.forEach(btn => btn.setAttribute('aria-pressed', btn.value === state.pane ? 'true' : 'false'));
+        presetSel && (presetSel.value = state.preset || '');
+      };
+      const updateUrl = () => {
+        const nqs = new URLSearchParams();
+        if (state.pane) nqs.set('pane', state.pane);
+        if (state.effect) nqs.set('effect', state.effect);
+        if (state.variant) nqs.set('variant', state.variant);
+        if (state.code) nqs.set('code', '1');
+        if (state.preset) nqs.set('preset', state.preset);
+        const url = location.pathname + (nqs.toString() ? ('?' + nqs.toString()) : '');
+        history.replaceState({}, '', url);
+      };
+
+      // Init
+      applyPane(state.pane);
+      syncControlsFromState();
+      render();
+      updateUrl();
+
+      // Listeners
+      effectSel?.addEventListener('change', () => {
+        state.effect = effectSel.value;
+        if (state.effect !== 'glass-card') state.variant = '';
+        state.preset = '';
+        syncControlsFromState();
+        render();
+        updateUrl();
+      });
+      variantSel?.addEventListener('change', () => {
+        state.variant = variantSel.value;
+        state.preset = '';
+        render();
+        updateUrl();
+      });
+      codeChk?.addEventListener('change', () => {
+        state.code = !!codeChk.checked;
+        render();
+        updateUrl();
+      });
+      paneBtns.forEach(btn => btn.addEventListener('click', () => {
+        state.pane = btn.value || 'dark';
+        applyPane(state.pane);
+        syncControlsFromState();
+        updateUrl();
+      }));
+      presetSel?.addEventListener('change', () => {
+        state.preset = presetSel.value;
+        // when preset chosen, keep current pane but ignore effect/variant
+        render();
+        updateUrl();
+      });
+    })();
+  </script>
+  <style is:global>
+    .live-preview{border:1px solid rgba(148,163,184,.22);border-radius:14px;padding:1rem;background:linear-gradient(180deg,#0b1220,#0b1220)}
+    .live-preview[data-pane="light"]{background:linear-gradient(180deg,#f1f5f9,#ffffff);color:#0f172a}
+    .live-preview[data-pane="dark"]{background:linear-gradient(180deg,#0b1220,#0e1629);color:#e5e7eb}
+    .lp-head{display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+    .badge{display:inline-flex;gap:.35rem;align-items:center;border:1px solid rgba(148,163,184,.22);padding:.2rem .5rem;border-radius:8px;color:#94a3b8;font-size:.8rem}
+    .demo-target{display:grid;place-items:center;min-height:10rem}
+    .demo-code{margin-top:.5rem;border:1px dashed rgba(148,163,184,.22);border-radius:8px;padding:.25rem .5rem;background:rgba(255,255,255,.03)}
+    .demo-code summary{cursor:pointer;color:#9fb4d1}
+    .demo-code pre{margin:0;padding:.5rem;white-space:pre-wrap}
+    .seg{display:inline-flex;border:1px solid rgba(15,23,42,.2);border-radius:10px;background:#fff;overflow:hidden}
+    .seg button{appearance:none;border:none;background:transparent;padding:.35rem .6rem;color:#334155;cursor:pointer}
+    .seg button[aria-pressed="true"]{background:#e2e8f0}
+    .row{display:flex;gap:.5rem;margin:.5rem 0}
+    .row label{color:#334155;font-size:.9rem}
+    select{appearance:none;border:1px solid rgba(15,23,42,.2);border-radius:8px;padding:.35rem .5rem;background:#fff;color:#334155}
+  </style>
 </Base>

@@ -62,6 +62,9 @@ const darkActive = initialTheme !== 'light';
   .cs-badge{font-size:.75rem;padding:.2rem .5rem;border-radius:6px;color:#cbd5e1;border:1px solid rgba(148,163,184,.25);
     background:rgba(255,255,255,.04)}
   .cs-pre{margin:0;padding:1rem;color:#e5e7eb;font-size:.85rem;overflow:auto;font-family:ui-monospace,Menlo,Monaco,Consolas,monospace}
+  .cs-extra{display:flex;gap:.5rem;align-items:center;padding:.5rem 1rem;border-top:1px solid rgba(148,163,184,.18);
+    border-bottom:1px solid rgba(148,163,184,.18);background:linear-gradient(180deg,rgba(15,23,42,.45),rgba(15,23,42,.35))}
+  .cs-extra:empty{display:none}
   @media (max-width:820px){ .cs-head{align-items:flex-start} }
 </style>
 
@@ -72,13 +75,15 @@ const darkActive = initialTheme !== 'light';
       {description && <div class="cs-desc">{description}</div>}
     </div>
     <div class="cs-controls">
-      <button class="cs-btn" data-action="set-theme" data-value="light" aria-pressed={lightActive?'true':'false'}>Hell</button>
-      <button class="cs-btn" data-action="set-theme" data-value="dark" aria-pressed={darkActive?'true':'false'}>Dunkel</button>
+      <button class="cs-btn" data-action="set-theme" data-value="light" aria-pressed={lightActive?'true':'false'}>Light</button>
+      <button class="cs-btn" data-action="set-theme" data-value="dark" aria-pressed={darkActive?'true':'false'}>Dark</button>
       <span class="cs-sep" aria-hidden="true"></span>
       <button class="cs-btn" data-action="toggle-code" aria-pressed={showCodeInitially?'true':'false'}>Code</button>
       <button class="cs-btn" data-action="copy-code" title="Code kopieren">Copy</button>
     </div>
   </div>
+
+  <div class="cs-extra"><slot name="controls" /></div>
 
   <div class={`cs-stage ${fullBleed ? 'full' : ''}`}>
     <div class={`cs-inner ${!fullBleed ? 'cs-minH' : ''} ${maxHeight ? 'cs-maxH' : ''}`}

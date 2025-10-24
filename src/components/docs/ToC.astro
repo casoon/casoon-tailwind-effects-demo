@@ -1,0 +1,16 @@
+---
+export interface Item { id: string; label: string }
+export interface Props { items: Item[]; title?: string }
+const { items = [], title = 'Inhalt' } = Astro.props;
+---
+{items.length > 0 && (
+  <aside class="toc" aria-label={title}>
+    <div class="toc-title">{title}</div>
+    <nav>
+      {items.map((i) => (
+        <a href={`#${i.id}`}>{i.label}</a>
+      ))}
+    </nav>
+  </aside>
+)}
+

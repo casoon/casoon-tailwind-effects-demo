@@ -1,0 +1,35 @@
+---
+import DocsBase from '../../../layouts/DocsBase.astro';
+import PlaygroundLink from '../../../components/docs/PlaygroundLink.astro';
+---
+
+<DocsBase title="Docs – Guides">
+  <h1>Guides</h1>
+  <p class="lead">Practical guides with best practices. Short steps, copy‑ready code.</p>
+
+  <div class="cards">
+    <a class="card" href="/docs/guides/orbs-glass-hero">
+      <h3>Orbs + Glass Hero</h3>
+      <p>Hero background with CTA card — performant and readable.</p>
+    </a>
+    <a class="card" href="/docs/guides/theming-tokens">
+      <h3>Theming with Tokens</h3>
+      <p>Define CSS custom properties well and override locally.</p>
+    </a>
+    <a class="card" href="/docs/guides/performance">
+      <h3>Performance</h3>
+      <p>Reduced Motion, Layout‑Stabilität, konditionale Effekte.</p>
+    </a>
+  </div>
+
+  <section class="section prose">
+    <h2>Playground Presets</h2>
+    <p>Open these guide examples directly in the Playground:</p>
+    <div class="cards">
+      <div class="card"><h3>Hero + CTA</h3><p>Orbs hero with CTA card.</p><p style="margin-top:.5rem"><PlaygroundLink preset="hero-cta" pane="dark" /></p></div>
+      <div class="card"><h3>Feature Grid</h3><p>Drei Glass‑Karten.</p><p style="margin-top:.5rem"><PlaygroundLink preset="feature-grid" /></p></div>
+      <div class="card"><h3>Login Card</h3><p>Form with glass inputs.</p><p style="margin-top:.5rem"><PlaygroundLink preset="login-card" /></p></div>
+      <div class="card"><h3>Navigation</h3><p>Light/Dark Varianten.</p><p style="margin-top:.5rem;display:flex;gap:.5rem;flex-wrap:wrap"><PlaygroundLink preset="nav" /><PlaygroundLink preset="nav-light" /></p></div>
+    </div>
+  </section>
+</DocsBase>
